@@ -5,15 +5,29 @@ class Dice {
   float rotx = -PI/4;
   float roty = PI/4;
   float rotz = 5;
+
+  boolean Roll;
+  float Anframe;
+
+  float Zfront;
+  float Zback;
+  float Ybot;
+  float Ytop;
+  float Xleft;
+  float Xright;
+
+  int dZfront;
+  int dZback;
+  int dYbot;
+  int dYtop;
+  int dXleft;
+  int dXright;
+
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");
   PImage arrow = loadImage("Orlog.arrow.png");
   PImage shield = loadImage("Orlog.shield.png");
   PImage hand = loadImage("Orlog.hand.png");
-  float droll;
-  int dvalue;
-  boolean Roll;
-  float Anframe;
 
 
   Dice(float _xPos, float _yPos, float _zPos) {
@@ -23,21 +37,25 @@ class Dice {
     textureMode(NORMAL);
     Roll = true;
     Anframe = 0;
+    
   }
 
   void update() {
+    Prep();
+    RAnimation();
+    Rotate();
+    Assign();
+    Render();
+
+    popMatrix();
+  }
+  void Prep() {
     fill(255);
     stroke(color(44, 48, 32));
     noStroke();
     pushMatrix();
     translate(xPos, yPos, zPos);
-    scale(60);
-    RAnimation();
-    Rotate();
-    Rolling();
-    Render();
-
-    popMatrix();
+    scale(35);
   }
 
   void Rotate() {
@@ -48,16 +66,19 @@ class Dice {
       rotx = rotx + 0.04;
     }
   }
+
   void RAnimation() {
     if (Roll) {
       if (Anframe < 180) {
         yPos = yPos - 1;
+        zPos = zPos + 2;
       }
       if (180 < Anframe && Anframe < 540) {
-        yPos = yPos + 1;
+        yPos = yPos + 1.5;
+        zPos = zPos - 1;
       }
 
-      zPos = zPos - 0.5;
+
       Anframe = Anframe + 2;
       if (Anframe > 550) {
         Roll = !Roll;
@@ -65,15 +86,49 @@ class Dice {
     }
   }
 
-
-  void Rolling() {
-    droll = random(0.5, 5.49);
-    dvalue = round(droll);
+  void Assign() {
+    if (sRoll) {
+      Zfront = random (0.5,6.49);
+      Zback= random (0.5,6.49);
+      Ybot= random (0.5,6.49);
+      Ytop= random (0.5,6.49);
+      Xleft= random (0.5,6.49);
+      Xright = random (0.5,6.49);
+      dZfront = round(Zfront);
+      dZback = round(Zback);
+      dYbot = round(Ybot);
+      dYtop = round(Ytop);
+      dXleft = round(Xleft);
+      dXright = round(Xright);
+      print(dZfront);
+      sRoll = !sRoll;
+    }
   }
+
   void Render() {
+    
     beginShape();
     // +Z "front" face
-    texture(axe);
+    switch(dZfront){
+      case 1:
+      texture(axe);
+      break;
+      case 2:
+      texture(hand);
+      break;
+      case 3:
+      texture(axe);
+      break;
+      case 4:
+      texture(helmet);
+      break;
+      case 5:
+      texture(shield);
+      break;
+      case 6:
+      texture(arrow);
+      break;
+    }
     vertex(-1, -1, 1, 0, 0);
     vertex( 1, -1, 1, 1, 0);
     vertex( 1, 1, 1, 1, 1);
