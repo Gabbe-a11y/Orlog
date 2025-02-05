@@ -12,7 +12,8 @@ class Dice {
   PImage hand = loadImage("Orlog.hand.png");
   float droll;
   int dvalue;
-  boolean Rolling;
+  boolean Roll;
+  float Anframe;
 
 
   Dice(float _xPos, float _yPos, float _zPos) {
@@ -20,6 +21,8 @@ class Dice {
     yPos = _yPos;
     zPos = _zPos;
     textureMode(NORMAL);
+    Roll = true;
+    Anframe = 0;
   }
 
   void update() {
@@ -29,25 +32,43 @@ class Dice {
     pushMatrix();
     translate(xPos, yPos, zPos);
     scale(60);
+    RAnimation();
     Rotate();
-    Roll();
+    Rolling();
     Render();
 
     popMatrix();
   }
 
   void Rotate() {
-    rotateX(rotx);
-    rotateY(roty);
-    roty = roty + 0.002;
-    rotx = rotx + 0.02;
+    if (Roll) {
+      rotateX(rotx);
+      rotateY(roty);
+      roty = roty + 0.08;
+      rotx = rotx + 0.04;
+    }
+  }
+  void RAnimation() {
+    if (Roll) {
+      if (Anframe < 180) {
+        yPos = yPos - 1;
+      }
+      if (180 < Anframe && Anframe < 540) {
+        yPos = yPos + 1;
+      }
+
+      zPos = zPos - 0.5;
+      Anframe = Anframe + 2;
+      if (Anframe > 550) {
+        Roll = !Roll;
+      }
+    }
   }
 
-  void Roll() {
-    if (Rolling) {
-      droll = random(0.5, 5.49);
-      dvalue = round(droll);
-    }
+
+  void Rolling() {
+    droll = random(0.5, 5.49);
+    dvalue = round(droll);
   }
   void Render() {
     beginShape();

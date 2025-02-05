@@ -1,6 +1,9 @@
 Dice dice1;
 Dice dice2;
 Dice dice3;
+Dice dice4;
+Dice dice5;
+Dice dice6;
 String gamestate;
 void setup() {
   size(750, 500, P3D);
