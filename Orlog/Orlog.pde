@@ -15,6 +15,13 @@ void setup() {
   dice5 = new Dice (width/2 -150 , height/2, -100);
   dice6 = new Dice (width/2 -250, height/2, -100);
   gamestate = "Intro";
+  dice1.Assign();
+  dice2.Assign();
+  dice3.Assign();
+  dice4.Assign();
+  dice5.Assign();
+  dice6.Assign();
+  sRoll = !sRoll;
 }
 
 void draw() {

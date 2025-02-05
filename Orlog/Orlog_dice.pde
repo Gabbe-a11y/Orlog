@@ -22,7 +22,6 @@ class Dice {
   int dYtop;
   int dXleft;
   int dXright;
-
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");
   PImage arrow = loadImage("Orlog.arrow.png");
@@ -37,14 +36,12 @@ class Dice {
     textureMode(NORMAL);
     Roll = true;
     Anframe = 0;
-    
   }
 
   void update() {
     Prep();
     RAnimation();
     Rotate();
-    Assign();
     Render();
 
     popMatrix();
@@ -88,28 +85,135 @@ class Dice {
 
   void Assign() {
     if (sRoll) {
-      Zfront = random (0.5,6.49);
-      Zback= random (0.5,6.49);
-      Ybot= random (0.5,6.49);
-      Ytop= random (0.5,6.49);
-      Xleft= random (0.5,6.49);
-      Xright = random (0.5,6.49);
+      Zfront = random (0.5, 6.49);
+      Zback= random (0.5, 6.49);
+      Ybot= random (0.5, 6.49);
+      Ytop= random (0.5, 6.49);
+      Xleft= random (0.5, 6.49);
+      Xright = random (0.5, 6.49);
       dZfront = round(Zfront);
       dZback = round(Zback);
       dYbot = round(Ybot);
       dYtop = round(Ytop);
       dXleft = round(Xleft);
       dXright = round(Xright);
-      print(dZfront);
-      sRoll = !sRoll;
+      }
     }
-  }
+  
 
   void Render() {
-    
+
     beginShape();
     // +Z "front" face
-    switch(dZfront){
+    switch(dZfront) {
+    case 1:
+      texture(axe);
+      break;
+    case 2:
+      texture(hand);
+      break;
+    case 3:
+      texture(axe);
+      break;
+    case 4:
+      texture(helmet);
+      break;
+    case 5:
+      texture(shield);
+      break;
+    case 6:
+      texture(arrow);
+      break;
+    }
+    vertex(-1, -1, 1, 0, 0);
+    vertex( 1, -1, 1, 1, 0);
+    vertex( 1, 1, 1, 1, 1);
+    vertex(-1, 1, 1, 0, 1);
+    endShape();
+    // -Z "back" face
+    beginShape();
+    switch(dZback) {
+    case 1:
+      texture(axe);
+      break;
+    case 2:
+      texture(hand);
+      break;
+    case 3:
+      texture(axe);
+      break;
+    case 4:
+      texture(helmet);
+      break;
+    case 5:
+      texture(shield);
+      break;
+    case 6:
+      texture(arrow);
+      break;
+    }
+    vertex( 1, -1, -1, 0, 0);
+    vertex(-1, -1, -1, 1, 0);
+    vertex(-1, 1, -1, 1, 1);
+    vertex( 1, 1, -1, 0, 1);
+    endShape();
+    // +Y "bottom" face
+    beginShape();
+    switch(dYbot) {
+    case 1:
+      texture(axe);
+      break;
+    case 2:
+      texture(hand);
+      break;
+    case 3:
+      texture(axe);
+      break;
+    case 4:
+      texture(helmet);
+      break;
+    case 5:
+      texture(shield);
+      break;
+    case 6:
+      texture(arrow);
+      break;
+    }
+    vertex(-1, 1, 1, 0, 0);
+    vertex( 1, 1, 1, 1, 0);
+    vertex( 1, 1, -1, 1, 1);
+    vertex(-1, 1, -1, 0, 1);
+    endShape();
+    // -Y "top" face
+    beginShape();
+    switch(dYtop) {
+    case 1:
+      texture(axe);
+      break;
+    case 2:
+      texture(hand);
+      break;
+    case 3:
+      texture(axe);
+      break;
+    case 4:
+      texture(helmet);
+      break;
+    case 5:
+      texture(shield);
+      break;
+    case 6:
+      texture(arrow);
+      break;
+    }
+    vertex(-1, -1, -1, 0, 0);
+    vertex( 1, -1, -1, 1, 0);
+    vertex( 1, -1, 1, 1, 1);
+    vertex(-1, -1, 1, 0, 1);
+    endShape();
+    // +X "right" face
+    beginShape();
+    switch(dXright){
       case 1:
       texture(axe);
       break;
@@ -129,38 +233,6 @@ class Dice {
       texture(arrow);
       break;
     }
-    vertex(-1, -1, 1, 0, 0);
-    vertex( 1, -1, 1, 1, 0);
-    vertex( 1, 1, 1, 1, 1);
-    vertex(-1, 1, 1, 0, 1);
-    endShape();
-    // -Z "back" face
-    beginShape();
-    texture(axe);
-    vertex( 1, -1, -1, 0, 0);
-    vertex(-1, -1, -1, 1, 0);
-    vertex(-1, 1, -1, 1, 1);
-    vertex( 1, 1, -1, 0, 1);
-    endShape();
-    // +Y "bottom" face
-    beginShape();
-    texture(arrow);
-    vertex(-1, 1, 1, 0, 0);
-    vertex( 1, 1, 1, 1, 0);
-    vertex( 1, 1, -1, 1, 1);
-    vertex(-1, 1, -1, 0, 1);
-    endShape();
-    // -Y "top" face
-    beginShape();
-    texture(hand);
-    vertex(-1, -1, -1, 0, 0);
-    vertex( 1, -1, -1, 1, 0);
-    vertex( 1, -1, 1, 1, 1);
-    vertex(-1, -1, 1, 0, 1);
-    endShape();
-    // +X "right" face
-    beginShape();
-    texture(shield);
     vertex( 1, -1, 1, 0, 0);
     vertex( 1, -1, -1, 1, 0);
     vertex( 1, 1, -1, 1, 1);
@@ -168,7 +240,26 @@ class Dice {
     endShape();
     // -X "left" face
     beginShape();
-    texture(helmet);
+    switch(dXleft){
+      case 1:
+      texture(axe);
+      break;
+      case 2:
+      texture(hand);
+      break;
+      case 3:
+      texture(axe);
+      break;
+      case 4:
+      texture(helmet);
+      break;
+      case 5:
+      texture(shield);
+      break;
+      case 6:
+      texture(arrow);
+      break;
+    }
     vertex(-1, -1, -1, 0, 0);
     vertex(-1, -1, 1, 1, 0);
     vertex(-1, 1, 1, 1, 1);
