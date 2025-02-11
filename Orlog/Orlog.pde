@@ -6,25 +6,16 @@ Dice dice5;
 Dice dice6;
 String gamestate;
 Boolean sRoll = true;
-PImage axe = loadImage("Orlog.axe.png");
-PImage helmet = loadImage("Orlog.housecarl.png");
-PImage arrow = loadImage("Orlog.arrow.png");
-PImage shield = loadImage("Orlog.shield.png");
-PImage hand = loadImage("Orlog.hand.png");
-PImage handfavour = loadImage("Orlog.hand.favour.png");
-PImage shieldfavour = loadImage("Orlog.shield.favour.png");
-PImage arrowfavour = loadImage("Orlog.arrow.favour.png");
-PImage helmetfavour = loadImage("Orlog.housecarl.favour.png");
 void setup() {
   size(750, 500, P3D);
   dice1 = new Dice (width/2 - 50, height/2, -100, 1);
-  dice2 = new Dice (width/2 -150, height/2, -100, 2);
+  dice2 = new Dice (width/2 -150 , height/2, -100, 2);
   dice3 = new Dice (width/2 -250, height/2, -100, 3);
   dice4 = new Dice (width/2 + 50, height/2, -100, 4);
   dice5 = new Dice (width/2 + 150, height/2, -100, 5);
   dice6 = new Dice (width/2 + 250, height/2, -100, 6);
   gamestate = "Intro";
-  Diceassign();
+  Diceassign(); 
   sRoll = !sRoll;
 }
 
@@ -40,8 +31,7 @@ void draw() {
 
 void mousePressed() {
 }
-
-void Diceassign() {
+void Diceassign(){
   dice1.Assign();
   dice2.Assign();
   dice3.Assign();

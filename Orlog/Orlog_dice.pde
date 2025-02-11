@@ -16,6 +16,16 @@ class Dice {
 
   int dZfront;
 
+  PImage axe = loadImage("Orlog.axe.png");
+  PImage helmet = loadImage("Orlog.housecarl.png");
+  PImage arrow = loadImage("Orlog.arrow.png");
+  PImage shield = loadImage("Orlog.shield.png");
+  PImage hand = loadImage("Orlog.hand.png");
+  PImage handfavour = loadImage("Orlog.hand.favour.png");
+  PImage shieldfavour = loadImage("Orlog.shield.favour.png");
+  PImage arrowfavour = loadImage("Orlog.arrow.favour.png");
+  PImage helmetfavour = loadImage("Orlog.housecarl.favour.png");
+
 
   Dice(float _xPos, float _yPos, float _zPos, int _type) {
     xPos = _xPos;
