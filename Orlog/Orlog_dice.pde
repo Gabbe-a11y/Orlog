@@ -13,9 +13,9 @@ class Dice {
 
   int type;
   int random;
-  
+
   int dZfront;
-  
+
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");
   PImage arrow = loadImage("Orlog.arrow.png");
@@ -101,26 +101,7 @@ class Dice {
     endShape();
     // -Z "back" face
     beginShape();
-    switch(type) {
-    case 1:
-      texture(axe);
-      break;
-    case 2:
-      texture(hand);
-      break;
-    case 3:
-      texture(axe);
-      break;
-    case 4:
-      texture(helmet);
-      break;
-    case 5:
-      texture(shield);
-      break;
-    case 6:
-      texture(arrow);
-      break;
-    }
+    Randomcontinue();
     vertex( 1, -1, -1, 0, 0);
     vertex(-1, -1, -1, 1, 0);
     vertex(-1, 1, -1, 1, 1);
@@ -128,26 +109,7 @@ class Dice {
     endShape();
     // +Y "bottom" face
     beginShape();
-    switch(type) {
-    case 1:
-      texture(axe);
-      break;
-    case 2:
-      texture(hand);
-      break;
-    case 3:
-      texture(axe);
-      break;
-    case 4:
-      texture(helmet);
-      break;
-    case 5:
-      texture(shield);
-      break;
-    case 6:
-      texture(arrow);
-      break;
-    }
+    Randomcontinue();
     vertex(-1, 1, 1, 0, 0);
     vertex( 1, 1, 1, 1, 0);
     vertex( 1, 1, -1, 1, 1);
@@ -155,26 +117,7 @@ class Dice {
     endShape();
     // -Y "top" face
     beginShape();
-    switch(type) {
-    case 1:
-      texture(axe);
-      break;
-    case 2:
-      texture(hand);
-      break;
-    case 3:
-      texture(axe);
-      break;
-    case 4:
-      texture(helmet);
-      break;
-    case 5:
-      texture(shield);
-      break;
-    case 6:
-      texture(arrow);
-      break;
-    }
+    Randomcontinue();
     vertex(-1, -1, -1, 0, 0);
     vertex( 1, -1, -1, 1, 0);
     vertex( 1, -1, 1, 1, 1);
@@ -182,26 +125,7 @@ class Dice {
     endShape();
     // +X "right" face
     beginShape();
-    switch(type) {
-    case 1:
-      texture(axe);
-      break;
-    case 2:
-      texture(hand);
-      break;
-    case 3:
-      texture(axe);
-      break;
-    case 4:
-      texture(helmet);
-      break;
-    case 5:
-      texture(shield);
-      break;
-    case 6:
-      texture(arrow);
-      break;
-    }
+    Randomcontinue();
     vertex( 1, -1, 1, 0, 0);
     vertex( 1, -1, -1, 1, 0);
     vertex( 1, 1, -1, 1, 1);
@@ -209,26 +133,7 @@ class Dice {
     endShape();
     // -X "left" face
     beginShape();
-    switch(type) {
-    case 1:
-      texture(axe);
-      break;
-    case 2:
-      texture(hand);
-      break;
-    case 3:
-      texture(axe);
-      break;
-    case 4:
-      texture(helmet);
-      break;
-    case 5:
-      texture(shield);
-      break;
-    case 6:
-      texture(arrow);
-      break;
-    }
+    Randomcontinue();
     vertex(-1, -1, -1, 0, 0);
     vertex(-1, -1, 1, 1, 0);
     vertex(-1, 1, 1, 1, 1);
@@ -241,27 +146,27 @@ class Dice {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
-        random = 1;
+        random = 2;
         break;
       case 2:
         texture(axe);
-        random = 2;
+        random = 3;
         break;
       case 3:
         texture(arrowfavour);
-        random = 3;
+        random = 4;
         break;
       case 4:
         texture(shield);
-        random = 4;
+        random = 5;
         break;
       case 5:
         texture(helmet);
-        random = 5;
+        random = 6;
         break;
       case 6:
         texture(handfavour);
-        random = 6;
+        random = 1;
         break;
       }
       break;
@@ -269,27 +174,27 @@ class Dice {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
-        random = 1;
+        random = 2;
         break;
       case 2:
         texture(axe);
-        random = 2;
-        break;
-      case 3:
-        texture(arrowfavour);
         random = 3;
         break;
-      case 4:
-        texture(shield);
+      case 3:
+        texture(arrow);
         random = 4;
         break;
-      case 5:
-        texture(helmet);
+      case 4:
+        texture(shieldfavour);
         random = 5;
         break;
-      case 6:
+      case 5:
         texture(handfavour);
         random = 6;
+        break;
+      case 6:
+        texture(helmet);
+        random = 1;
         break;
       }
       break;
@@ -297,27 +202,27 @@ class Dice {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
-        random = 1;
+        random = 2;
         break;
       case 2:
         texture(axe);
-        random = 2;
-        break;
-      case 3:
-        texture(arrowfavour);
         random = 3;
         break;
-      case 4:
-        texture(shield);
+      case 3:
+        texture(hand);
         random = 4;
         break;
-      case 5:
-        texture(helmet);
+      case 4:
+        texture(arrowfavour);
         random = 5;
         break;
-      case 6:
-        texture(handfavour);
+      case 5:
+        texture(helmetfavour);
         random = 6;
+        break;
+      case 6:
+        texture(shield);
+        random = 1;
         break;
       }
       break;
@@ -325,27 +230,27 @@ class Dice {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
-        random = 1;
-        break;
-      case 2:
-        texture(axe);
         random = 2;
         break;
-      case 3:
-        texture(arrowfavour);
+      case 2:
+        texture(arrow);
         random = 3;
+        break;
+      case 3:
+        texture(handfavour);
+        random = 4;
         break;
       case 4:
         texture(shield);
-        random = 4;
-        break;
-      case 5:
-        texture(helmet);
         random = 5;
         break;
-      case 6:
-        texture(handfavour);
+      case 5:
+        texture(helmetfavour);
         random = 6;
+        break;
+      case 6:
+        texture(axe);
+        random = 1;
         break;
       }
       break;
@@ -353,27 +258,27 @@ class Dice {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
-        random = 1;
+        random = 2;
         break;
       case 2:
         texture(axe);
-        random = 2;
-        break;
-      case 3:
-        texture(arrowfavour);
         random = 3;
         break;
-      case 4:
-        texture(shield);
+      case 3:
+        texture(hand);
         random = 4;
+        break;
+      case 4:
+        texture(shieldfavour);
+        random = 5;
         break;
       case 5:
         texture(helmet);
-        random = 5;
+        random = 6;
         break;
       case 6:
-        texture(handfavour);
-        random = 6;
+        texture(arrowfavour);
+        random = 1;
         break;
       }
       break;
@@ -381,30 +286,178 @@ class Dice {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
-        random = 1;
+        random = 2;
         break;
       case 2:
         texture(axe);
-        random = 2;
-        break;
-      case 3:
-        texture(arrowfavour);
         random = 3;
         break;
-      case 4:
-        texture(shield);
+      case 3:
+        texture(hand);
         random = 4;
         break;
-      case 5:
-        texture(helmet);
+      case 4:
+        texture(shieldfavour);
         random = 5;
         break;
-      case 6:
-        texture(handfavour);
+      case 5:
+        texture(arrow);
         random = 6;
+        break;
+      case 6:
+        texture(helmetfavour);
+        random = 1;
         break;
       }
       break;
+    }
+  }
+  void Randomcontinue() {
+    switch(type) {
+    case 1:
+      switch(random) {
+      case 1:
+        texture(axe);
+        break;
+      case 2:
+        texture(axe);
+        break;
+      case 3:
+        texture(arrowfavour);
+        break;
+      case 4:
+        texture(shield);
+        break;
+      case 5:
+        texture(helmet);
+        break;
+      case 6:
+        texture(handfavour);
+        break;
+      }
+      Dicecheck();
+      break;
+    case 2:
+      switch(random) {
+      case 1:
+        texture(axe);
+        break;
+      case 2:
+        texture(axe);
+        break;
+      case 3:
+        texture(arrow);
+        break;
+      case 4:
+        texture(shieldfavour);
+        break;
+      case 5:
+        texture(handfavour);
+        break;
+      case 6:
+        texture(helmet);
+        break;
+      }
+      Dicecheck();
+      break;
+    case 3:
+      switch(random) {
+      case 1:
+        texture(axe);
+        break;
+      case 2:
+        texture(axe);
+        break;
+      case 3:
+        texture(hand);
+        break;
+      case 4:
+        texture(arrowfavour);
+        break;
+      case 5:
+        texture(helmetfavour);
+        break;
+      case 6:
+        texture(shield);
+        break;
+      }
+      Dicecheck();
+      break;
+    case 4:
+      switch(random) {
+      case 1:
+        texture(axe);
+        break;
+      case 2:
+        texture(arrow);
+        break;
+      case 3:
+        texture(handfavour);
+        break;
+      case 4:
+        texture(shield);
+        break;
+      case 5:
+        texture(helmetfavour);
+        break;
+      case 6:
+        texture(axe);
+        break;
+      }
+      Dicecheck();
+      break;
+    case 5:
+      switch(random) {
+      case 1:
+        texture(axe);
+        break;
+      case 2:
+        texture(axe);
+        break;
+      case 3:
+        texture(hand);
+        break;
+      case 4:
+        texture(shieldfavour);
+        break;
+      case 5:
+        texture(helmet);
+        break;
+      case 6:
+        texture(arrowfavour);
+        break;
+      }
+      Dicecheck();
+      break;
+    case 6:
+      switch(random) {
+      case 1:
+        texture(axe);
+        break;
+      case 2:
+        texture(axe);
+        break;
+      case 3:
+        texture(hand);
+        break;
+      case 4:
+        texture(shieldfavour);
+        break;
+      case 5:
+        texture(arrow);
+        break;
+      case 6:
+        texture(helmetfavour);
+        break;
+      }
+      Dicecheck();
+      break;
+    }
+  }
+  void Dicecheck() {
+    random = random + 1;
+    if (random > 6) {
+      random = 1;
     }
   }
 }
