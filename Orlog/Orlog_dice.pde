@@ -4,7 +4,7 @@ class Dice {
   float zPos;
   float rotx = -PI/4;
   float roty = PI/4;
-  float rotz = 5;
+
 
   boolean Roll;
   float Anframe;
@@ -58,8 +58,9 @@ class Dice {
     if (Roll) {
       rotateX(rotx);
       rotateY(roty);
-      roty = roty + random(0.08, 0.1);
-      rotx = rotx + random(0.04, 0.09);
+
+      roty = roty + random(0.01, 0.1);
+      rotx = rotx + random(0.04, 0.15);
     }
   }
 
