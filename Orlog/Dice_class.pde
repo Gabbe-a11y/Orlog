@@ -38,9 +38,20 @@ class Dice {
   }
 
   void update() {
+    Prep();
     RAnimation();
     Rotate();
     Render();
+
+    popMatrix();
+  }
+  void Prep() {
+    fill(255);
+    stroke(color(44, 48, 32));
+    noStroke();
+    pushMatrix();
+    translate(xPos, yPos, zPos);
+    scale(35);
   }
 
   void Rotate() {
@@ -85,12 +96,6 @@ class Dice {
 
 
   void Render() {
-    fill(255);
-    stroke(color(44, 48, 32));
-    noStroke();
-    pushMatrix();
-    translate(xPos, yPos, zPos);
-    scale(35);
     beginShape();
     // +Z "front" face
     Random();
@@ -139,7 +144,6 @@ class Dice {
     vertex(-1, 1, 1, 1, 1);
     vertex(-1, 1, -1, 0, 1);
     endShape();
-    popMatrix();
   }
   void Arrayassign() {
     switch(type) {
