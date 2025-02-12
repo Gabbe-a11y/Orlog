@@ -5,7 +5,7 @@ class Dice {
   float rotx = -PI/4;
   float roty = PI/4;
 
-
+  boolean locked = false;
   boolean Roll;
   float Anframe;
 
@@ -85,8 +85,11 @@ class Dice {
 
   void Assign() {
     if (sRoll) {
-      Zfront = random (0.5, 6.49);
-      dZfront = round(Zfront);
+      if (!locked) {
+        Zfront = random (0.5, 6.49);
+        dZfront = round(Zfront);
+        Arrayassign();
+      }
     }
   }
 
@@ -141,6 +144,29 @@ class Dice {
     vertex(-1, 1, -1, 0, 1);
     endShape();
   }
+  void Arrayassign() {
+    switch(type) {
+    case 1:
+      Dices[0] = dZfront;
+      break;
+    case 2:
+      Dices[1] = dZfront;
+      break;
+    case 3:
+      Dices[2] = dZfront;
+      break;
+    case 4:
+      Dices[3] = dZfront;
+      break;
+    case 5:
+      Dices[4] = dZfront;
+      break;
+    case 6:
+      Dices[5] = dZfront;
+      break;
+    }
+  }
+
   void Random() {
     switch(type) {  //Kollar vilken tärning det är
     case 1:
