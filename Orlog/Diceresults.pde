@@ -1,9 +1,9 @@
 String res1;
-  String res2;
-  String res3;
-  String res4;
-  String res5;
-  String res6;
+String res2;
+String res3;
+String res4;
+String res5;
+String res6;
 void Diceresults() {
   switch(Dices[0]) {
   case 1:
@@ -14,7 +14,7 @@ void Diceresults() {
     break;
   case 3:
     res1 = "Arrow+";
-      break;
+    break;
   case 4:
     res1 = "Shield";
     break;
@@ -34,7 +34,7 @@ void Diceresults() {
     break;
   case 3:
     res2 = "Arrow";
-      break;
+    break;
   case 4:
     res2 = "Shield+";
     break;
@@ -54,7 +54,7 @@ void Diceresults() {
     break;
   case 3:
     res3 = "Hand";
-      break;
+    break;
   case 4:
     res3 = "Arrow+";
     break;
@@ -74,7 +74,7 @@ void Diceresults() {
     break;
   case 3:
     res4 = "Hand+";
-      break;
+    break;
   case 4:
     res4 = "Shield";
     break;
@@ -94,7 +94,7 @@ void Diceresults() {
     break;
   case 3:
     res5 = "Hand";
-      break;
+    break;
   case 4:
     res5 = "Shield+";
     break;
@@ -114,7 +114,7 @@ void Diceresults() {
     break;
   case 3:
     res6 = "Hand";
-      break;
+    break;
   case 4:
     res6 = "Shield+";
     break;
