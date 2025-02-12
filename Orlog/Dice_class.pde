@@ -59,7 +59,7 @@ class Dice {
       rotateX(rotx);
       rotateY(roty);
 
-      roty = roty + random(0.01, 0.1);
+      roty = roty + random(0.01, 0.06);
       rotx = rotx + random(0.04, 0.15);
     }
   }
@@ -79,6 +79,7 @@ class Dice {
       Anframe = Anframe + 2;
       if (Anframe > 528) {
         Roll = !Roll;
+        Display();
       }
     }
   }

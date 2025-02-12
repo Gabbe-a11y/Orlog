@@ -4,10 +4,17 @@ Dice dice3;
 Dice dice4;
 Dice dice5;
 Dice dice6;
+Display dis1;
+Display dis2;
+Display dis3;
+Display dis4;
+Display dis5;
+Display dis6;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
 String gamestate;
 Boolean sRoll = true;
+Boolean display = false;
 void setup() {
   size(750, 500, P3D);
   dice1 = new Dice (width/2 -250, height/2, -100, 1);
@@ -42,4 +49,10 @@ void Diceassign() {
   dice6.Assign();
   Diceresults();
   println(Diceres);
+}
+void Display() {
+  display = true;
+}
+void Undisplay() {
+  display = false;
 }
