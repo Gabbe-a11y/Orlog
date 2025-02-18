@@ -46,8 +46,6 @@ class Dice {
     popMatrix();
   }
   void Prep() {
-    fill(255);
-    stroke(color(44, 48, 32));
     noStroke();
     pushMatrix();
     translate(xPos, yPos, zPos);

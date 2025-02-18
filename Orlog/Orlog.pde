@@ -14,7 +14,7 @@ int[] Dices = new int[6];
 String[] Diceres = new String[6];
 String gamestate;
 Boolean sRoll = true;
-Boolean display = false;
+Boolean displaying = false;
 void setup() {
   size(750, 500, P3D);
   dice1 = new Dice (width/2 -250, height/2, -100, 1);
@@ -23,9 +23,14 @@ void setup() {
   dice4 = new Dice (width/2 + 50, height/2, -100, 4);
   dice5 = new Dice (width/2 + 150, height/2, -100, 5);
   dice6 = new Dice (width/2 + 250, height/2, -100, 6);
+  dis1 = new Display(width/2 -250, 50, -100, 1);
+  dis2 = new Display(width/2 -150, 50, -100, 2);
+  dis3 = new Display(width/2 -50, 50, -100, 3);
+  dis4 = new Display(width/2 +50, 50, -100, 4);
+  dis5 = new Display(width/2 +150, 50, -100, 5);
+  dis6 = new Display(width/2 +250, 50, -100, 6);
   gamestate = "Intro";
-  Diceassign();
-  sRoll = !sRoll;
+  Roll();
 }
 
 void draw() {
@@ -36,10 +41,15 @@ void draw() {
   dice4.update();
   dice5.update();
   dice6.update();
+  dis1.update();
+  dis2.update();
+  dis3.update();
+  dis4.update();
+  dis5.update();
+  dis6.update();
 }
 
-void mousePressed() {
-}
+
 void Diceassign() {
   dice1.Assign();
   dice2.Assign();
@@ -50,9 +60,13 @@ void Diceassign() {
   Diceresults();
   println(Diceres);
 }
+
+void Roll() {
+  Diceassign();
+}
 void Display() {
-  display = true;
+  displaying = true;
 }
 void Undisplay() {
-  display = false;
+  displaying = false;
 }
