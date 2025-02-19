@@ -38,6 +38,9 @@ class Dice {
   }
 
   void update() {
+
+    pushMatrix();
+
     Prep();
     RAnimation();
     Rotate();
@@ -47,7 +50,6 @@ class Dice {
   }
   void Prep() {
     noStroke();
-    pushMatrix();
     translate(xPos, yPos, zPos);
     scale(35);
   }
@@ -76,12 +78,15 @@ class Dice {
 
       Anframe = Anframe + 2;
       if (Anframe > 528) {
-        Roll = !Roll;
+        Roll = false;
         Display();
       }
     }
   }
 
+  void Roll() {
+    Roll = true;
+  }
   void Assign() {
     if (sRoll) {
       if (!locked) {
@@ -92,7 +97,9 @@ class Dice {
     }
   }
 
-
+void lock(){
+  locked = !locked;
+}
   void Render() {
     beginShape();
     // +Z "front" face

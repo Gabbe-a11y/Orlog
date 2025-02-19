@@ -18,6 +18,7 @@ class Display {
     yPos = _yPos;
     zPos = _zPos;
     type = _type;
+    textureMode(NORMAL);
   }
 
   void update() {
@@ -27,18 +28,19 @@ class Display {
 
 
   void Render() {
-    fill(250);
-    scale(35);
-    pushMatrix();
-    translate(xPos, yPos, zPos);
-    beginShape();
-    Texture();
-    vertex(-1, -1, 1, 0, 0);
-    vertex( 1, -1, 1, 1, 0);
-    vertex( 1, 1, 1, 1, 1);
-    vertex(-1, 1, 1, 0, 1);
-    endShape();
-    popMatrix();
+    if (displaying) {
+      fill(200);
+      pushMatrix();     
+      translate(xPos, yPos, zPos);
+      beginShape();
+      Texture();
+      vertex(-50, -50, 50, 0, 0);
+      vertex( 50, -50, 50, 1, 0);
+      vertex( 50, 50, 50, 1, 1);
+      vertex(-50, 50, 50, 0, 1);
+      endShape();
+      popMatrix();
+    }
   }
 
   void Texture() {

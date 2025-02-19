@@ -15,6 +15,7 @@ String[] Diceres = new String[6];
 String gamestate;
 Boolean sRoll = true;
 Boolean displaying = false;
+int Rolltimes;
 void setup() {
   size(750, 500, P3D);
   dice1 = new Dice (width/2 -250, height/2, -100, 1);
@@ -69,4 +70,22 @@ void Display() {
 }
 void Undisplay() {
   displaying = false;
+}
+
+void keyPressed() {
+  if (gamestate == "Rolled") {
+    switch(key){
+      case 1:
+      dice1.lock();
+      break;
+      case 2:
+      dice2.lock();
+      break;
+      case 3:
+      dice3.lock();
+      break;
+    }
+    if (key == CODED) {
+    }
+  }
 }
