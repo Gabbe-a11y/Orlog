@@ -4,7 +4,7 @@ String res3;
 String res4;
 String res5;
 String res6;
-void Diceresults() {
+void Diceresults(){
   switch(Dices[0]) {
   case 1:
     res1 = "Axe";

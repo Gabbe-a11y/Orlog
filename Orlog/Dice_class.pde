@@ -80,6 +80,7 @@ class Dice {
       if (Anframe > 528) {
         Roll = false;
         Display();
+        print(zPos);
       }
     }
   }

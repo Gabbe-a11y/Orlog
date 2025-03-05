@@ -2,7 +2,10 @@ class Display {
   float xPos;
   float yPos;
   float zPos;
+  float size;
   int type;
+  boolean locked;
+  int anframe;
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");
   PImage arrow = loadImage("Orlog.arrow.png");
@@ -19,29 +22,40 @@ class Display {
     zPos = _zPos;
     type = _type;
     textureMode(NORMAL);
+    locked = false;
+    anframe= 0;
+    size = 50;
   }
 
   void update() {
     Render();
   }
 
-
+  void lock() {
+    locked = !locked;
+  }
 
   void Render() {
     if (displaying) {
-      fill(200);
-      pushMatrix();     
+      pushMatrix();
       translate(xPos, yPos, zPos);
       beginShape();
       Texture();
-      vertex(-50, -50, 50, 0, 0);
-      vertex( 50, -50, 50, 1, 0);
-      vertex( 50, 50, 50, 1, 1);
-      vertex(-50, 50, 50, 0, 1);
+      vertex(-size, -size, size, 0, 0);
+      vertex( size, -size, size, 1, 0);
+      vertex( size, size, size, 1, 1);
+      vertex(-size, size, size, 0, 1);
       endShape();
       popMatrix();
     }
+    if (locked && gamestate == "disan") {
+      animation();
+    }
   }
+
+void animation(){
+  
+}
 
   void Texture() {
     switch(type) {

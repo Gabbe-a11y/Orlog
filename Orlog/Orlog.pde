@@ -17,7 +17,7 @@ Boolean sRoll = true;
 Boolean displaying = false;
 int Rolltimes;
 void setup() {
-  size(750, 500, P3D);
+  size(750,500,P3D);
   dice1 = new Dice (width/2 -250, height/2, -100, 1);
   dice2 = new Dice (width/2 -150, height/2, -100, 2);
   dice3 = new Dice (width/2 - 50, height/2, -100, 3);
@@ -30,7 +30,6 @@ void setup() {
   dis4 = new Display(width/2 +50, 50, -100, 4);
   dis5 = new Display(width/2 +150, 50, -100, 5);
   dis6 = new Display(width/2 +250, 50, -100, 6);
-  gamestate = "Intro";
   Roll();
 }
 
@@ -59,7 +58,6 @@ void Diceassign() {
   dice5.Assign();
   dice6.Assign();
   Diceresults();
-  println(Diceres);
 }
 
 void Roll() {
@@ -70,33 +68,31 @@ void Display() {
   gamestate = "Rolled";
 }
 
-
-void keyPressed() {
-  if (gamestate == "Rolled") {
-    switch(key){
-      case 1:
-      dice1.lock();
-      break;
-      case 2:
-      dice2.lock();
-      break;
-      case 3:
-      dice3.lock();
-      break;
-      case 4:
-      dice4.lock();
-      break;
-      case 5:
-      dice5.lock();
-      break;
-      case 6:
-      dice6.lock();
-      break;
-    }
-    if (key == CODED) {
-      if (key == ENTER){
-        Roll();
-      }
-    }
+void mousePressed(){
+  if(gamestate == "Rolled"){
+   if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100){
+     dice1.lock();
+     dis1.lock();
+   } 
+   else if (width/2-200 <= mouseX && mouseX <= width/2-100 && 0 <= mouseY && mouseY <= 100){
+     dice2.lock();
+     dis2.lock();
+   }
+   else if (width/2-100 <= mouseX && mouseX <= width/2 && 0 <= mouseY && mouseY <= 100){
+     dice3.lock();
+     dis3.lock();
   }
+  else if (width/2 <= mouseX && mouseX <= width/2 +100 && 0 <= mouseY && mouseY <= 100){
+     dice4.lock();
+     dis4.lock();
+   }
+   else if (width/2 + 100 <= mouseX && mouseX <= width/2 + 200 && 0 <= mouseY && mouseY <= 100){
+     dice5.lock();
+     dis5.lock();
+  }
+  else if (width/2 + 200 <= mouseX && mouseX <= width/2 + 300 && 0 <= mouseY && mouseY <= 100){
+    dice6.lock();
+    dis6.lock();
+  }
+}
 }
