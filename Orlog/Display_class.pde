@@ -75,11 +75,11 @@ class Display {
       case "Shield+":
         texture(shieldfavour);
         break;
-      case "Helmet+":
-        texture(helmetfavour);
+      case "Helmet":
+        texture(helmet);
         break;
-      case "Hand":
-        texture(hand);
+      case "Hand+":
+        texture(handfavour);
         break;
       }
       break;

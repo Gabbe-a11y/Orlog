@@ -35,7 +35,7 @@ void setup() {
 }
 
 void draw() {
-  background(0);
+  background(50);
   dice1.update();
   dice2.update();
   dice3.update();
@@ -67,10 +67,9 @@ void Roll() {
 }
 void Display() {
   displaying = true;
+  gamestate = "Rolled";
 }
-void Undisplay() {
-  displaying = false;
-}
+
 
 void keyPressed() {
   if (gamestate == "Rolled") {
@@ -84,8 +83,20 @@ void keyPressed() {
       case 3:
       dice3.lock();
       break;
+      case 4:
+      dice4.lock();
+      break;
+      case 5:
+      dice5.lock();
+      break;
+      case 6:
+      dice6.lock();
+      break;
     }
     if (key == CODED) {
+      if (key == ENTER){
+        Roll();
+      }
     }
   }
 }

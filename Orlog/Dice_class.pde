@@ -86,6 +86,7 @@ class Dice {
 
   void Roll() {
     Roll = true;
+    Anframe = 0;
   }
   void Assign() {
     if (sRoll) {
