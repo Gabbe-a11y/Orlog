@@ -54,7 +54,23 @@ class Display {
   }
 
 void animation(){
-  
+  size = size - (20/150);
+  switch(type){
+    case 1:
+    xPos = xPos - (25/150);
+    yPos = yPos - 
+    break;
+    case 2:
+    break;
+    case 3:
+    break;
+    case 4:
+    break;
+    case 5:
+    break;
+    case 6:
+    break;
+  }
 }
 
   void Texture() {

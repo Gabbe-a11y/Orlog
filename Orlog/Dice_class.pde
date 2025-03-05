@@ -103,6 +103,9 @@ void lock(){
   locked = !locked;
 }
   void Render() {
+    if (locked){
+      
+    }
     beginShape();
     // +Z "front" face
     Random();
