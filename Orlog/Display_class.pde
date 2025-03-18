@@ -49,9 +49,6 @@ class Display {
       vertex( size, size, size, 1, 1);
       vertex(-size, size, size, 0, 1);
       endShape();
-      if (locked) {
-        
-      }
       popMatrix();
     }
     if (locked && gamestate == "disan" && !animated) {
@@ -60,32 +57,32 @@ class Display {
   }
 
   void animation() {
-    size = size - (20/150);
+    size = size - 1/3;
     anframe = anframe + 1;
     switch(type) {
     case 1:
-      xPos = xPos - (25/150);
-      yPos = yPos + (150/150);
+      xPos = xPos - (75/150);
+      yPos = yPos + (50/150);
       break;
     case 2:
-      xPos = xPos - (125/150);
-      yPos = yPos + (175/150);
+      xPos = xPos - (175/150);
+      yPos = yPos + (100/150);
       break;
     case 3:
-      xPos = xPos - (225/150);
-      yPos = yPos + (200/150);
-      break;      
+      xPos = xPos - (275/150);
+      yPos = yPos + (150/150);
+      break;
     case 4:
-      xPos = xPos - (325/150);
-      yPos = yPos + (225/150);
+      xPos = xPos - (375/150);
+      yPos = yPos + (200/150);
       break;
     case 5:
-      xPos = xPos - (425/150);
+      xPos = xPos - (475/150);
       yPos = yPos + (250/150);
       break;
     case 6:
-      xPos = xPos - (525/150);
-      yPos = yPos + (275/150);
+      xPos = xPos - (575/150);
+      yPos = yPos + (300/150);
       break;
     }
     if (anframe == 150) {

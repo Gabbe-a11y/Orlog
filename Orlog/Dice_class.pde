@@ -4,7 +4,7 @@ class Dice {
   float zPos;
   float rotx = -PI/4;
   float roty = PI/4;
-
+  float locksafe;
   boolean locked = false;
   boolean Roll;
   float Anframe;
@@ -80,6 +80,7 @@ class Dice {
       if (Anframe > 528) {
         Roll = false;
         Display();
+        locksafe = yPos;
       }
     }
   }
@@ -102,9 +103,6 @@ void lock(){
   locked = !locked;
 }
   void Render() {
-    if (locked){
-      
-    }
     beginShape();
     // +Z "front" face
     Random();
@@ -153,8 +151,12 @@ void lock(){
     vertex(-1, 1, 1, 1, 1);
     vertex(-1, 1, -1, 0, 1);
     endShape();
+    if (gamestate == "rolled"){
     if (locked){
       yPos = height/2;
+    } else if (!locked){
+      yPos = locksafe;
+    }
     }
   }
   void Arrayassign() {
