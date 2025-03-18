@@ -5,6 +5,7 @@ class Display {
   float size;
   int type;
   boolean locked;
+  boolean animated;
   int anframe;
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");
@@ -16,6 +17,7 @@ class Display {
   PImage arrowfavour = loadImage("Orlog.arrow.favour.png");
   PImage helmetfavour = loadImage("Orlog.housecarl.favour.png");
 
+
   Display(float _xPos, float _yPos, float _zPos, int _type) {
     xPos = _xPos;
     yPos = _yPos;
@@ -25,6 +27,7 @@ class Display {
     locked = false;
     anframe= 0;
     size = 50;
+    animated = false;
   }
 
   void update() {
@@ -46,32 +49,51 @@ class Display {
       vertex( size, size, size, 1, 1);
       vertex(-size, size, size, 0, 1);
       endShape();
+      if (locked) {
+        
+      }
       popMatrix();
     }
-    if (locked && gamestate == "disan") {
+    if (locked && gamestate == "disan" && !animated) {
       animation();
     }
   }
 
-void animation(){
-  size = size - (20/150);
-  switch(type){
+  void animation() {
+    size = size - (20/150);
+    anframe = anframe + 1;
+    switch(type) {
     case 1:
-    xPos = xPos - (25/150);
-    yPos = yPos - 
-    break;
+      xPos = xPos - (25/150);
+      yPos = yPos + (150/150);
+      break;
     case 2:
-    break;
+      xPos = xPos - (125/150);
+      yPos = yPos + (175/150);
+      break;
     case 3:
-    break;
+      xPos = xPos - (225/150);
+      yPos = yPos + (200/150);
+      break;      
     case 4:
-    break;
+      xPos = xPos - (325/150);
+      yPos = yPos + (225/150);
+      break;
     case 5:
-    break;
+      xPos = xPos - (425/150);
+      yPos = yPos + (250/150);
+      break;
     case 6:
-    break;
+      xPos = xPos - (525/150);
+      yPos = yPos + (275/150);
+      break;
+    }
+    if (anframe == 150) {
+      animated = true;
+      gamestate = "reroll?";
+      anframe = 0;
+    }
   }
-}
 
   void Texture() {
     switch(type) {

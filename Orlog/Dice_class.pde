@@ -80,7 +80,6 @@ class Dice {
       if (Anframe > 528) {
         Roll = false;
         Display();
-        print(zPos);
       }
     }
   }
@@ -154,6 +153,9 @@ void lock(){
     vertex(-1, 1, 1, 1, 1);
     vertex(-1, 1, -1, 0, 1);
     endShape();
+    if (locked){
+      yPos = height/2;
+    }
   }
   void Arrayassign() {
     switch(type) {
