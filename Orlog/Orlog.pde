@@ -56,7 +56,7 @@ void Text() {
   case "reroll":
     break;
   case "rolled":
-  text("Tryck på de du vill behålla", width/2 - 100, height/2, 50);
+    text("Tryck på de du vill behålla", width/2 - 100, height/2, 50);
     break;
   }
 }
@@ -114,11 +114,16 @@ void mousePressed() {
   }
 }
 void keyPressed() {
-    if (key == ENTER && gamestate == "rolled") {
-      gamestate = "disan";
-    }
-  
+  if (key == ENTER && gamestate == "rolled") {
+    dis1.anstart();
+    dis2.anstart();
+    dis3.anstart();
+    dis4.anstart();
+    dis5.anstart();
+    dis6.anstart();
+    gamestate = "disan";
+  }
   if (key == 'R' && gamestate == "reroll") {
-    Roll();
+    Reroll();
   }
 }

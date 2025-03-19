@@ -2,6 +2,9 @@ class Dice {
   float xPos;
   float yPos;
   float zPos;
+  float startxPos;
+  float startyPos;
+  float startzPos;
   float rotx = -PI/4;
   float roty = PI/4;
   float locksafe;
@@ -28,13 +31,15 @@ class Dice {
 
 
   Dice(float _xPos, float _yPos, float _zPos, int _type) {
-    xPos = _xPos;
-    yPos = _yPos;
-    zPos = _zPos;
+    startxPos = _xPos;
+    startyPos = _yPos;
+    startzPos = _zPos;
+    xPos = startxPos;
+    yPos = startyPos;
+    zPos = startzPos;
     type = _type;
     textureMode(NORMAL);
     Roll = true;
-    Anframe = 0;
   }
 
   void update() {
@@ -66,18 +71,17 @@ class Dice {
 
   void RAnimation() {
     if (Roll) {
-      if (Anframe < 180) {
+      if (frameCount < Anframe + 90) {
         yPos = yPos - 1;
         zPos = zPos + 2;
       }
-      if (180 < Anframe && Anframe < 528) {
+      if (Anframe + 90 < frameCount && frameCount < Anframe + 264) {
         yPos = yPos + 1.5;
         zPos = zPos - 1;
       }
 
 
-      Anframe = Anframe + 2;
-      if (Anframe > 528) {
+      if (frameCount == Anframe + 264) {
         Roll = false;
         Display();
         locksafe = yPos;
@@ -87,7 +91,10 @@ class Dice {
 
   void Roll() {
     Roll = true;
-    Anframe = 0;
+    Anframe = frameCount;
+    xPos = startxPos;
+    yPos = startyPos;
+    zPos = startzPos;
   }
   void Assign() {
     if (sRoll) {
@@ -99,9 +106,9 @@ class Dice {
     }
   }
 
-void lock(){
-  locked = !locked;
-}
+  void lock() {
+    locked = !locked;
+  }
   void Render() {
     beginShape();
     // +Z "front" face
@@ -151,12 +158,12 @@ void lock(){
     vertex(-1, 1, 1, 1, 1);
     vertex(-1, 1, -1, 0, 1);
     endShape();
-    if (gamestate == "rolled"){
-    if (locked){
-      yPos = height/2;
-    } else if (!locked){
-      yPos = locksafe;
-    }
+    if (gamestate == "rolled") {
+      if (locked) {
+        yPos = height/2;
+      } else if (!locked) {
+        yPos = locksafe;
+      }
     }
   }
   void Arrayassign() {

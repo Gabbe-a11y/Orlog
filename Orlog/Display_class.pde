@@ -55,37 +55,38 @@ class Display {
       animation();
     }
   }
-
+void anstart(){
+  anframe = frameCount;
+}
   void animation() {
-    size = size - 1/3;
-    anframe = anframe + 1;
+    size = size - 0.2;
     switch(type) {
     case 1:
-      xPos = xPos - (75/150);
-      yPos = yPos + (50/150);
+      xPos = xPos - 1.5;
+      yPos = yPos + 0.5;
       break;
     case 2:
-      xPos = xPos - (175/150);
-      yPos = yPos + (100/150);
+      xPos = xPos - 2.51;
+      yPos = yPos + 1;
       break;
     case 3:
-      xPos = xPos - (275/150);
-      yPos = yPos + (150/150);
+      xPos = xPos - 3.51;
+      yPos = yPos + 1.5;
       break;
     case 4:
-      xPos = xPos - (375/150);
-      yPos = yPos + (200/150);
+      xPos = xPos - 4.51;
+      yPos = yPos + 2;
       break;
     case 5:
-      xPos = xPos - (475/150);
-      yPos = yPos + (250/150);
+      xPos = xPos - 5.51;
+      yPos = yPos + 2.5;
       break;
     case 6:
-      xPos = xPos - (575/150);
-      yPos = yPos + (300/150);
+      xPos = xPos - 6.51;
+      yPos = yPos + 3;
       break;
     }
-    if (anframe == 150) {
+    if (frameCount == anframe + 100) {
       animated = true;
       gamestate = "reroll?";
       anframe = 0;
