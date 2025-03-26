@@ -131,4 +131,5 @@ void Diceresults() {
   Diceres[3] = res4;
   Diceres[4] = res5;
   Diceres[5] = res6;
+  println(Diceres);
 }

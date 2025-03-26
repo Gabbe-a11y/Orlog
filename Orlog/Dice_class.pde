@@ -39,7 +39,8 @@ class Dice {
     zPos = startzPos;
     type = _type;
     textureMode(NORMAL);
-    Roll = true;
+    Zfront = random (0.5, 6.49);
+    dZfront = round(Zfront);
   }
 
   void update() {
@@ -72,8 +73,8 @@ class Dice {
   void RAnimation() {
     if (Roll) {
       if (frameCount < Anframe + 90) {
-        yPos = yPos - 1;
-        zPos = zPos + 2;
+        yPos = yPos - 1.5;
+        zPos = zPos + 4;
       }
       if (Anframe + 90 < frameCount && frameCount < Anframe + 264) {
         yPos = yPos + 1.5;

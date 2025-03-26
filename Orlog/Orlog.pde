@@ -30,26 +30,26 @@ void setup() {
   dis4 = new Display(width/2 +50, 50, -100, 4);
   dis5 = new Display(width/2 +150, 50, -100, 5);
   dis6 = new Display(width/2 +250, 50, -100, 6);
-  Roll();
+  gamestate = "start";
 }
 
 void draw() {
-  background(50);
-  dice1.update();
-  dice2.update();
-  dice3.update();
-  dice4.update();
-  dice5.update();
-  dice6.update();
-  dis1.update();
-  dis2.update();
-  dis3.update();
-  dis4.update();
-  dis5.update();
-  dis6.update();
-  Reroll();
-  Text();
-}
+  background(50);  
+    dice1.update();
+    dice2.update();
+    dice3.update();
+    dice4.update();
+    dice5.update();
+    dice6.update();
+    dis1.update();
+    dis2.update();
+    dis3.update();
+    dis4.update();
+    dis5.update();
+    dis6.update();
+    Reroll();
+    Text();
+  }
 
 void Text() {
   switch(gamestate) {
@@ -114,16 +114,24 @@ void mousePressed() {
   }
 }
 void keyPressed() {
-  if (key == ENTER && gamestate == "rolled") {
-    dis1.anstart();
-    dis2.anstart();
-    dis3.anstart();
-    dis4.anstart();
-    dis5.anstart();
-    dis6.anstart();
-    gamestate = "disan";
-  }
-  if (key == 'R' && gamestate == "reroll") {
-    Reroll();
+  if (key == ENTER) {
+    switch (gamestate) {
+    case "rolled":
+      dis1.anstart();
+      dis2.anstart();
+      dis3.anstart();
+      dis4.anstart();
+      dis5.anstart();
+      dis6.anstart();
+      gamestate = "disan";
+      break;
+    case "reroll":
+      Roll();
+      gamestate = "rolling";
+      break;
+    case "start":
+      Roll();
+      gamestate = "rolling";
+    }
   }
 }
