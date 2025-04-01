@@ -13,8 +13,9 @@ Display dis6;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
 String gamestate;
-Boolean displaying = false;
 int Rolltimes;
+int disAnframes;
+boolean Activeplayer;
 void setup() {
   size(750, 500, P3D);
   dice1 = new Dice (width/2 -250, height/2, -100, 1);
@@ -30,11 +31,13 @@ void setup() {
   dis5 = new Display(width/2 +150, 50, -100, 5);
   dis6 = new Display(width/2 +250, 50, -100, 6);
   gamestate = "start";
-  Roll();
+  Activeplayer = true;
 }
 
 void draw() {
   background(50);
+  Reroll();
+  Text();
   dice1.update();
   dice2.update();
   dice3.update();
@@ -47,8 +50,24 @@ void draw() {
   dis4.update();
   dis5.update();
   dis6.update();
-  Reroll();
-  Text();
+  if (gamestate == "disan" && disAnframes + 100 == frameCount) {
+    gamestate = "reroll?";
+  }
+  if (gamestate == "rolled" && Rolltimes == 3) {
+    DisAnStart();
+    dice1.lockdown();
+    dice2.lockdown();
+    dice3.lockdown();
+    dice4.lockdown();
+    dice5.lockdown();
+    dice6.lockdown();
+    dis1.lockdown();
+    dis2.lockdown();
+    dis3.lockdown();
+    dis4.lockdown();
+    dis5.lockdown();
+    dis6.lockdown();
+  }
 }
 
 void Text() {
@@ -65,6 +84,7 @@ void Reroll() {
     if (Rolltimes == 3) {
       gamestate = "read";
     } else {
+      DisplaysHide();
       gamestate = "reroll";
     }
   }
@@ -86,12 +106,30 @@ void Roll() {
   Rolltimes = Rolltimes + 1;
 }
 void Display() {
-  displaying = true;
+  dis1.Rendering = true;
+  dis2.Rendering = true;
+  dis3.Rendering = true;
+  dis4.Rendering = true;
+  dis5.Rendering = true;
+  dis6.Rendering = true;
   gamestate = "rolled";
 }
 
+void DisAnStart() {
+  disAnframes = frameCount;
+  gamestate = "disan";
+}
+
+void DisplaysHide() {
+  dis1.Hide();
+  dis2.Hide();
+  dis3.Hide();
+  dis4.Hide();
+  dis5.Hide();
+  dis6.Hide();
+}
 void mousePressed() {
-  if (gamestate == "rolled") {
+  if (gamestate == "rolled" && Rolltimes < 3) {
     if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
       dice1.lock();
       dis1.lock();
@@ -117,19 +155,19 @@ void keyPressed() {
   if (key == ENTER) {
     switch (gamestate) {
     case "rolled":
-      dis1.anstart();
-      dis2.anstart();
-      dis3.anstart();
-      dis4.anstart();
-      dis5.anstart();
-      dis6.anstart();
-      gamestate = "disan";
+      DisAnStart();
       break;
     case "reroll":
       Roll();
       gamestate = "rolling";
       break;
     case "start":
+      dice1.Render = true;
+      dice2.Render = true;
+      dice3.Render = true;
+      dice4.Render = true;
+      dice5.Render = true;
+      dice6.Render = true;
       Roll();
       gamestate = "rolling";
     }

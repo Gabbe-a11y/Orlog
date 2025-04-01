@@ -6,8 +6,7 @@ class Display {
   int type;
   boolean locked;
   boolean animated;
-  boolean Render;
-  int anframe;
+  boolean Rendering;
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");
   PImage arrow = loadImage("Orlog.arrow.png");
@@ -26,9 +25,9 @@ class Display {
     type = _type;
     textureMode(NORMAL);
     locked = false;
-    anframe= 0;
     size = 50;
     animated = false;
+    Rendering =false;
   }
 
   void update() {
@@ -38,9 +37,14 @@ class Display {
   void lock() {
     locked = !locked;
   }
+  void lockdown() {
+    if (!locked) {
+      locked = true;
+    }
+  }
 
   void Render() {
-    if (displaying) {
+    if (Rendering) {
       pushMatrix();
       translate(xPos, yPos, zPos);
       beginShape();
@@ -51,49 +55,48 @@ class Display {
       vertex(-size, size, size, 0, 1);
       endShape();
       popMatrix();
-    }
-    if (locked && gamestate == "disan" && !animated) {
       animation();
     }
   }
-void anstart(){
-  anframe = frameCount;
-}
   void animation() {
-    size = size - 0.2;
-    switch(type) {
-    case 1:
-      xPos = xPos - 1.5;
-      yPos = yPos + 0.5;
-      break;
-    case 2:
-      xPos = xPos - 2.51;
-      yPos = yPos + 1;
-      break;
-    case 3:
-      xPos = xPos - 3.51;
-      yPos = yPos + 1.5;
-      break;
-    case 4:
-      xPos = xPos - 4.51;
-      yPos = yPos + 2;
-      break;
-    case 5:
-      xPos = xPos - 5.51;
-      yPos = yPos + 2.5;
-      break;
-    case 6:
-      xPos = xPos - 6.51;
-      yPos = yPos + 3;
-      break;
-    }
-    if (frameCount == anframe + 100) {
-      animated = true;
-      gamestate = "reroll?";
-      anframe = 0;
+    if (locked == true && gamestate == "disan" && !animated) {
+      size = size - 0.2;
+      switch(type) {
+      case 1:
+        xPos = xPos - 1.5;
+        yPos = yPos + 0.5;
+        break;
+      case 2:
+        xPos = xPos - 2.51;
+        yPos = yPos + 1;
+        break;
+      case 3:
+        xPos = xPos - 3.51;
+        yPos = yPos + 1.5;
+        break;
+      case 4:
+        xPos = xPos - 4.51;
+        yPos = yPos + 2;
+        break;
+      case 5:
+        xPos = xPos - 5.51;
+        yPos = yPos + 2.5;
+        break;
+      case 6:
+        xPos = xPos - 6.51;
+        yPos = yPos + 3;
+        break;
+      }
+      if (frameCount == disAnframes + 100) {
+        animated = true;
+      }
     }
   }
-
+  void Hide() {
+    if (!locked) {
+      Rendering = false;
+    }
+  }
   void Texture() {
     switch(type) {
     case 1:

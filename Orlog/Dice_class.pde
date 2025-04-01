@@ -40,7 +40,7 @@ class Dice {
     zPos = startzPos;
     type = _type;
     textureMode(NORMAL);
-    Render = true;
+    Render = false;
   }
 
   void update() {
@@ -107,6 +107,12 @@ class Dice {
 
   void lock() {
     locked = !locked;
+  }
+  void lockdown() {
+    if (!locked) {
+      locked = true;
+      Render = false;
+    }
   }
   void Render() {
     if (Render) {
