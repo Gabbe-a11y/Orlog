@@ -13,7 +13,6 @@ Display dis6;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
 String gamestate;
-Boolean sRoll = true;
 Boolean displaying = false;
 int Rolltimes;
 void setup() {
@@ -31,25 +30,26 @@ void setup() {
   dis5 = new Display(width/2 +150, 50, -100, 5);
   dis6 = new Display(width/2 +250, 50, -100, 6);
   gamestate = "start";
+  Roll();
 }
 
 void draw() {
-  background(50);  
-    dice1.update();
-    dice2.update();
-    dice3.update();
-    dice4.update();
-    dice5.update();
-    dice6.update();
-    dis1.update();
-    dis2.update();
-    dis3.update();
-    dis4.update();
-    dis5.update();
-    dis6.update();
-    Reroll();
-    Text();
-  }
+  background(50);
+  dice1.update();
+  dice2.update();
+  dice3.update();
+  dice4.update();
+  dice5.update();
+  dice6.update();
+  dis1.update();
+  dis2.update();
+  dis3.update();
+  dis4.update();
+  dis5.update();
+  dis6.update();
+  Reroll();
+  Text();
+}
 
 void Text() {
   switch(gamestate) {

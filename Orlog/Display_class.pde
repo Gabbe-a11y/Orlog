@@ -6,6 +6,7 @@ class Display {
   int type;
   boolean locked;
   boolean animated;
+  boolean Render;
   int anframe;
   PImage axe = loadImage("Orlog.axe.png");
   PImage helmet = loadImage("Orlog.housecarl.png");

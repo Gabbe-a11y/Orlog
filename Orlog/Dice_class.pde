@@ -10,6 +10,7 @@ class Dice {
   float locksafe;
   boolean locked = false;
   boolean Roll;
+  boolean Render;
   float Anframe;
 
   float Zfront;
@@ -39,12 +40,10 @@ class Dice {
     zPos = startzPos;
     type = _type;
     textureMode(NORMAL);
-    Zfront = random (0.5, 6.49);
-    dZfront = round(Zfront);
+    Render = true;
   }
 
   void update() {
-
     pushMatrix();
 
     Prep();
@@ -74,7 +73,7 @@ class Dice {
     if (Roll) {
       if (frameCount < Anframe + 90) {
         yPos = yPos - 1.5;
-        zPos = zPos + 4;
+        zPos = zPos + 2;
       }
       if (Anframe + 90 < frameCount && frameCount < Anframe + 264) {
         yPos = yPos + 1.5;
@@ -90,20 +89,19 @@ class Dice {
     }
   }
 
-  void Roll() {
-    Roll = true;
-    Anframe = frameCount;
-    xPos = startxPos;
-    yPos = startyPos;
-    zPos = startzPos;
-  }
+
   void Assign() {
-    if (sRoll) {
-      if (!locked) {
-        Zfront = random (0.5, 6.49);
-        dZfront = round(Zfront);
-        Arrayassign();
-      }
+    if (locked) {
+      Render = false;
+    } else if (!locked) {
+      Zfront = random (0.5, 6.49);
+      dZfront = round(Zfront);
+      Roll = true;
+      Anframe = frameCount;
+      xPos = startxPos;
+      yPos = startyPos;
+      zPos = startzPos;
+      Arrayassign();
     }
   }
 
@@ -111,59 +109,61 @@ class Dice {
     locked = !locked;
   }
   void Render() {
-    beginShape();
-    // +Z "front" face
-    Random();
-    vertex(-1, -1, 1, 0, 0);
-    vertex( 1, -1, 1, 1, 0);
-    vertex( 1, 1, 1, 1, 1);
-    vertex(-1, 1, 1, 0, 1);
-    endShape();
-    // -Z "back" face
-    beginShape();
-    Randomcontinue();
-    vertex( 1, -1, -1, 0, 0);
-    vertex(-1, -1, -1, 1, 0);
-    vertex(-1, 1, -1, 1, 1);
-    vertex( 1, 1, -1, 0, 1);
-    endShape();
-    // +Y "bottom" face
-    beginShape();
-    Randomcontinue();
-    vertex(-1, 1, 1, 0, 0);
-    vertex( 1, 1, 1, 1, 0);
-    vertex( 1, 1, -1, 1, 1);
-    vertex(-1, 1, -1, 0, 1);
-    endShape();
-    // -Y "top" face
-    beginShape();
-    Randomcontinue();
-    vertex(-1, -1, -1, 0, 0);
-    vertex( 1, -1, -1, 1, 0);
-    vertex( 1, -1, 1, 1, 1);
-    vertex(-1, -1, 1, 0, 1);
-    endShape();
-    // +X "right" face
-    beginShape();
-    Randomcontinue();
-    vertex( 1, -1, 1, 0, 0);
-    vertex( 1, -1, -1, 1, 0);
-    vertex( 1, 1, -1, 1, 1);
-    vertex( 1, 1, 1, 0, 1);
-    endShape();
-    // -X "left" face
-    beginShape();
-    Randomcontinue();
-    vertex(-1, -1, -1, 0, 0);
-    vertex(-1, -1, 1, 1, 0);
-    vertex(-1, 1, 1, 1, 1);
-    vertex(-1, 1, -1, 0, 1);
-    endShape();
-    if (gamestate == "rolled") {
-      if (locked) {
-        yPos = height/2;
-      } else if (!locked) {
-        yPos = locksafe;
+    if (Render) {
+      beginShape();
+      // +Z "front" face
+      Random();
+      vertex(-1, -1, 1, 0, 0);
+      vertex( 1, -1, 1, 1, 0);
+      vertex( 1, 1, 1, 1, 1);
+      vertex(-1, 1, 1, 0, 1);
+      endShape();
+      // -Z "back" face
+      beginShape();
+      Randomcontinue();
+      vertex( 1, -1, -1, 0, 0);
+      vertex(-1, -1, -1, 1, 0);
+      vertex(-1, 1, -1, 1, 1);
+      vertex( 1, 1, -1, 0, 1);
+      endShape();
+      // +Y "bottom" face
+      beginShape();
+      Randomcontinue();
+      vertex(-1, 1, 1, 0, 0);
+      vertex( 1, 1, 1, 1, 0);
+      vertex( 1, 1, -1, 1, 1);
+      vertex(-1, 1, -1, 0, 1);
+      endShape();
+      // -Y "top" face
+      beginShape();
+      Randomcontinue();
+      vertex(-1, -1, -1, 0, 0);
+      vertex( 1, -1, -1, 1, 0);
+      vertex( 1, -1, 1, 1, 1);
+      vertex(-1, -1, 1, 0, 1);
+      endShape();
+      // +X "right" face
+      beginShape();
+      Randomcontinue();
+      vertex( 1, -1, 1, 0, 0);
+      vertex( 1, -1, -1, 1, 0);
+      vertex( 1, 1, -1, 1, 1);
+      vertex( 1, 1, 1, 0, 1);
+      endShape();
+      // -X "left" face
+      beginShape();
+      Randomcontinue();
+      vertex(-1, -1, -1, 0, 0);
+      vertex(-1, -1, 1, 1, 0);
+      vertex(-1, 1, 1, 1, 1);
+      vertex(-1, 1, -1, 0, 1);
+      endShape();
+      if (gamestate == "rolled") {
+        if (locked) {
+          yPos = height/2;
+        } else if (!locked) {
+          yPos = locksafe;
+        }
       }
     }
   }
