@@ -12,44 +12,66 @@ Display dis5;
 Display dis6;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
+int[] Dices2 = new int[6];
+String[] Diceres2 = new String[6];
 String gamestate;
+String activeplayer;
 int Rolltimes;
 int disAnframes;
-boolean Activeplayer;
+int p1health;
+int p2health;
+int p1favour;
+int p2favour;
+int p1axes;
+int p2axes;
+int p1arrows;
+int p2arrows;
+int p1helmets;
+int p2helmets;
+int p1shields;
+int p2shields;
+int p1hands;
+int p2hands;
+PImage stone;
 void setup() {
   size(750, 500, P3D);
-  dice1 = new Dice (width/2 -250, height/2, -100, 1);
-  dice2 = new Dice (width/2 -150, height/2, -100, 2);
+  stone = loadImage("Health-stone.png");
+  dice1 = new Dice (width/2 - 250, height/2, -100, 1);
+  dice2 = new Dice (width/2 - 150, height/2, -100, 2);
   dice3 = new Dice (width/2 - 50, height/2, -100, 3);
   dice4 = new Dice (width/2 + 50, height/2, -100, 4);
   dice5 = new Dice (width/2 + 150, height/2, -100, 5);
   dice6 = new Dice (width/2 + 250, height/2, -100, 6);
-  dis1 = new Display(width/2 -250, 50, -100, 1);
-  dis2 = new Display(width/2 -150, 50, -100, 2);
-  dis3 = new Display(width/2 -50, 50, -100, 3);
-  dis4 = new Display(width/2 +50, 50, -100, 4);
-  dis5 = new Display(width/2 +150, 50, -100, 5);
-  dis6 = new Display(width/2 +250, 50, -100, 6);
+  dis1 = new Display(width/2 - 250, 50, -100, 1);
+  dis2 = new Display(width/2 - 150, 50, -100, 2);
+  dis3 = new Display(width/2 - 50, 50, -100, 3);
+  dis4 = new Display(width/2 + 50, 50, -100, 4);
+  dis5 = new Display(width/2 + 150, 50, -100, 5);
+  dis6 = new Display(width/2 + 250, 50, -100, 6);
   gamestate = "start";
-  Activeplayer = true;
+  activeplayer = "1";
+  p1health = 15;
+  p2health = 15;
+  p1favour = 0;
+  p2favour = 0;
 }
 
 void draw() {
   background(50);
   Reroll();
   Text();
-  dice1.update();
-  dice2.update();
-  dice3.update();
-  dice4.update();
-  dice5.update();
-  dice6.update();
   dis1.update();
   dis2.update();
   dis3.update();
   dis4.update();
   dis5.update();
   dis6.update();
+  dice1.update();
+  dice2.update();
+  dice3.update();
+  dice4.update();
+  dice5.update();
+  dice6.update();
   if (gamestate == "disan" && disAnframes + 100 == frameCount) {
     gamestate = "reroll?";
   }
@@ -71,6 +93,9 @@ void draw() {
 }
 
 void Text() {
+  fill(250);
+  text(p1health, 50, 450);
+  text(p2health, 700, 450);
   switch(gamestate) {
   case "reroll":
     break;
