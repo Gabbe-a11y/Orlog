@@ -63,7 +63,7 @@ class Display {
       size = size - 0.2;
       switch(type) {
       case 1:
-        xPos = xPos - 1.5;
+        xPos = xPos - 1.51;
         yPos = yPos + 0.5;
         break;
       case 2:
@@ -85,8 +85,9 @@ class Display {
       case 6:
         xPos = xPos - 6.51;
         yPos = yPos + 3;
-        break;
+        break;     
       }
+      
       if (frameCount == disAnframes + 100) {
         animated = true;
       }
@@ -95,6 +96,11 @@ class Display {
   void Hide() {
     if (!locked) {
       Rendering = false;
+    }
+  }
+  void display(){
+    if (!locked){
+      Rendering = true;
     }
   }
   void Texture() {

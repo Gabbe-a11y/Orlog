@@ -174,49 +174,25 @@ class Dice {
     }
   }
   void Arrayassign() {
-    if (activeplayer == "1") {
-      switch(type) {
-      case 1:
-        Dices[0] = dZfront;
-        break;
-      case 2:
-        Dices[1] = dZfront;
-        break;
-      case 3:
-        Dices[2] = dZfront;
-        break;
-      case 4:
-        Dices[3] = dZfront;
-        break;
-      case 5:
-        Dices[4] = dZfront;
-        break;
-      case 6:
-        Dices[5] = dZfront;
-        break;
-      }
-    }
-    if (activeplayer == "2") {
-      switch(type) {
-      case 1:
-        Dices[0] = dZfront;
-        break;
-      case 2:
-        Dices[1] = dZfront;
-        break;
-      case 3:
-        Dices[2] = dZfront;
-        break;
-      case 4:
-        Dices[3] = dZfront;
-        break;
-      case 5:
-        Dices[4] = dZfront;
-        break;
-      case 6:
-        Dices[5] = dZfront;
-        break;
-      }
+    switch(type) {
+    case 1:
+      Dices[0] = dZfront;
+      break;
+    case 2:
+      Dices[1] = dZfront;
+      break;
+    case 3:
+      Dices[2] = dZfront;
+      break;
+    case 4:
+      Dices[3] = dZfront;
+      break;
+    case 5:
+      Dices[4] = dZfront;
+      break;
+    case 6:
+      Dices[5] = dZfront;
+      break;
     }
   }
 

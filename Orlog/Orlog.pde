@@ -10,28 +10,21 @@ Display dis3;
 Display dis4;
 Display dis5;
 Display dis6;
+Display dis7;
+Display dis8;
+Display dis9;
+Display dis10;
+Display dis11;
+Display dis12;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
 int[] Dices2 = new int[6];
 String[] Diceres2 = new String[6];
 String gamestate;
-String activeplayer;
-int Rolltimes;
+int activeplayer;
+int p1Rolltimes;
+int p2Rolltimes;
 int disAnframes;
-int p1health;
-int p2health;
-int p1favour;
-int p2favour;
-int p1axes;
-int p2axes;
-int p1arrows;
-int p2arrows;
-int p1helmets;
-int p2helmets;
-int p1shields;
-int p2shields;
-int p1hands;
-int p2hands;
 PImage stone;
 void setup() {
   size(750, 500, P3D);
@@ -48,8 +41,14 @@ void setup() {
   dis4 = new Display(width/2 + 50, 50, -100, 4);
   dis5 = new Display(width/2 + 150, 50, -100, 5);
   dis6 = new Display(width/2 + 250, 50, -100, 6);
+  dis7 = new Display(width/2 - 250, 50, -100, 1);
+  dis8 = new Display(width/2 - 150, 50, -100, 2);
+  dis9 = new Display(width/2 - 50, 50, -100, 3);
+  dis10 = new Display(width/2 + 50, 50, -100, 4);
+  dis11 = new Display(width/2 + 150, 50, -100, 5);
+  dis12 = new Display(width/2 + 250, 50, -100, 6);
   gamestate = "start";
-  activeplayer = "1";
+  activeplayer = 1;
   p1health = 15;
   p2health = 15;
   p1favour = 0;
@@ -66,6 +65,12 @@ void draw() {
   dis4.update();
   dis5.update();
   dis6.update();
+  dis7.update();
+  dis8.update();
+  dis9.update();
+  dis10.update();
+  dis11.update();
+  dis12.update();
   dice1.update();
   dice2.update();
   dice3.update();
@@ -75,7 +80,7 @@ void draw() {
   if (gamestate == "disan" && disAnframes + 100 == frameCount) {
     gamestate = "reroll?";
   }
-  if (gamestate == "rolled" && Rolltimes == 3) {
+  if (gamestate == "rolled" && p1Rolltimes == 3 && p2Rolltimes == 3) {
     DisAnStart();
     dice1.lockdown();
     dice2.lockdown();
@@ -106,7 +111,7 @@ void Text() {
 }
 void Reroll() {
   if (gamestate == "reroll?") {
-    if (Rolltimes == 3) {
+    if (p1Rolltimes == 3 && p2Rolltimes == 3) {
       gamestate = "read";
     } else {
       DisplaysHide();
@@ -128,15 +133,31 @@ void Diceassign() {
 
 void Roll() {
   Diceassign();
-  Rolltimes = Rolltimes + 1;
+  if (activeplayer == 1) {
+    p1Rolltimes = p1Rolltimes + 1;
+    activeplayer = 2;
+  } else if (activeplayer == 2) {
+    p2Rolltimes = p2Rolltimes + 1;
+    activeplayer = 1;
+  }
 }
 void Display() {
-  dis1.Rendering = true;
-  dis2.Rendering = true;
-  dis3.Rendering = true;
-  dis4.Rendering = true;
-  dis5.Rendering = true;
-  dis6.Rendering = true;
+  if (activeplayer == 1) {
+    dis1.display();
+    dis2.display();
+    dis3.display();
+    dis4.display();
+    dis5.display();
+    dis6.display();
+  }
+  if (activeplayer == 2) {
+    dis7.display();
+    dis8.display();
+    dis9.display();
+    dis10.display();
+    dis11.display();
+    dis12.display();
+  }
   gamestate = "rolled";
 }
 
@@ -153,8 +174,9 @@ void DisplaysHide() {
   dis5.Hide();
   dis6.Hide();
 }
+int dis;
 void mousePressed() {
-  if (gamestate == "rolled" && Rolltimes < 3) {
+  if (gamestate == "rolled") {
     if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
       dice1.lock();
       dis1.lock();
@@ -176,6 +198,8 @@ void mousePressed() {
     }
   }
 }
+
+
 void keyPressed() {
   if (key == ENTER) {
     switch (gamestate) {
