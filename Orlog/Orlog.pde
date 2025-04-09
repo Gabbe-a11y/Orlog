@@ -4,6 +4,12 @@ Dice dice3;
 Dice dice4;
 Dice dice5;
 Dice dice6;
+Dice dice7;
+Dice dice8;
+Dice dice9;
+Dice dice10;
+Dice dice11;
+Dice dice12;
 Display dis1;
 Display dis2;
 Display dis3;
@@ -35,20 +41,25 @@ void setup() {
   dice4 = new Dice (width/2 + 50, height/2, -100, 4);
   dice5 = new Dice (width/2 + 150, height/2, -100, 5);
   dice6 = new Dice (width/2 + 250, height/2, -100, 6);
+  dice7 = new Dice (width/2 - 250, height/2, -100, 7);
+  dice8 = new Dice (width/2 - 150, height/2, -100, 8);
+  dice9 = new Dice (width/2 - 50, height/2, -100, 9);
+  dice10 = new Dice (width/2 + 50, height/2, -100, 10);
+  dice11 = new Dice (width/2 + 150, height/2, -100, 11);
+  dice12 = new Dice (width/2 + 250, height/2, -100, 12);
   dis1 = new Display(width/2 - 250, 50, -100, 1);
   dis2 = new Display(width/2 - 150, 50, -100, 2);
   dis3 = new Display(width/2 - 50, 50, -100, 3);
   dis4 = new Display(width/2 + 50, 50, -100, 4);
   dis5 = new Display(width/2 + 150, 50, -100, 5);
   dis6 = new Display(width/2 + 250, 50, -100, 6);
-  dis7 = new Display(width/2 - 250, 50, -100, 1);
-  dis8 = new Display(width/2 - 150, 50, -100, 2);
-  dis9 = new Display(width/2 - 50, 50, -100, 3);
-  dis10 = new Display(width/2 + 50, 50, -100, 4);
-  dis11 = new Display(width/2 + 150, 50, -100, 5);
-  dis12 = new Display(width/2 + 250, 50, -100, 6);
+  dis7 = new Display(width/2 - 250, 50, -100, 7);
+  dis8 = new Display(width/2 - 150, 50, -100, 8);
+  dis9 = new Display(width/2 - 50, 50, -100, 9);
+  dis10 = new Display(width/2 + 50, 50, -100, 10);
+  dis11 = new Display(width/2 + 150, 50, -100, 11);
+  dis12 = new Display(width/2 + 250, 50, -100, 12);
   gamestate = "start";
-  activeplayer = 1;
   p1health = 15;
   p2health = 15;
   p1favour = 0;
@@ -77,23 +88,46 @@ void draw() {
   dice4.update();
   dice5.update();
   dice6.update();
+  dice7.update();
+  dice8.update();
+  dice9.update();
+  dice10.update();
+  dice11.update();
+  dice12.update();
   if (gamestate == "disan" && disAnframes + 100 == frameCount) {
     gamestate = "reroll?";
   }
-  if (gamestate == "rolled" && p1Rolltimes == 3 && p2Rolltimes == 3) {
-    DisAnStart();
-    dice1.lockdown();
-    dice2.lockdown();
-    dice3.lockdown();
-    dice4.lockdown();
-    dice5.lockdown();
-    dice6.lockdown();
-    dis1.lockdown();
-    dis2.lockdown();
-    dis3.lockdown();
-    dis4.lockdown();
-    dis5.lockdown();
-    dis6.lockdown();
+  if (gamestate == "rolled") {
+    if (p1Rolltimes == 3) {
+      DisAnStart();
+      dis1.lockdown();
+      dis2.lockdown();
+      dis3.lockdown();
+      dis4.lockdown();
+      dis5.lockdown();
+      dis6.lockdown();
+      dice1.lockdown();
+      dice2.lockdown();
+      dice3.lockdown();
+      dice4.lockdown();
+      dice5.lockdown();
+      dice6.lockdown();
+    }
+    if (p2Rolltimes == 3) {
+      DisAnStart();
+      dis7.lockdown();
+      dis8.lockdown();
+      dis9.lockdown();
+      dis10.lockdown();
+      dis11.lockdown();
+      dis12.lockdown();
+      dice7.lockdown();
+      dice8.lockdown();
+      dice9.lockdown();
+      dice10.lockdown();
+      dice11.lockdown();
+      dice12.lockdown();
+    }
   }
 }
 
@@ -109,9 +143,23 @@ void Text() {
     break;
   }
 }
+int diceslocked;
 void Reroll() {
+  diceslocked = 0;
+  dice1.diceslocked();
+  dice2.diceslocked();
+  dice3.diceslocked();
+  dice4.diceslocked();
+  dice5.diceslocked();
+  dice6.diceslocked();
+  dice7.diceslocked();
+  dice8.diceslocked();
+  dice9.diceslocked();
+  dice10.diceslocked();
+  dice11.diceslocked();
+  dice12.diceslocked();
   if (gamestate == "reroll?") {
-    if (p1Rolltimes == 3 && p2Rolltimes == 3) {
+    if (p1Rolltimes == 3 && p2Rolltimes == 3 || diceslocked == 12) {
       gamestate = "read";
     } else {
       DisplaysHide();
@@ -122,12 +170,21 @@ void Reroll() {
 
 void Diceassign() {
   gamestate = "rolling";
-  dice1.Assign();
-  dice2.Assign();
-  dice3.Assign();
-  dice4.Assign();
-  dice5.Assign();
-  dice6.Assign();
+  if (activeplayer == 1) {
+    dice1.Assign();
+    dice2.Assign();
+    dice3.Assign();
+    dice4.Assign();
+    dice5.Assign();
+    dice6.Assign();
+  } else if (activeplayer == 2) {
+    dice7.Assign();
+    dice8.Assign();
+    dice9.Assign();
+    dice10.Assign();
+    dice11.Assign();
+    dice12.Assign();
+  }
   Diceresults();
 }
 
@@ -135,10 +192,8 @@ void Roll() {
   Diceassign();
   if (activeplayer == 1) {
     p1Rolltimes = p1Rolltimes + 1;
-    activeplayer = 2;
   } else if (activeplayer == 2) {
     p2Rolltimes = p2Rolltimes + 1;
-    activeplayer = 1;
   }
 }
 void Display() {
@@ -149,8 +204,7 @@ void Display() {
     dis4.display();
     dis5.display();
     dis6.display();
-  }
-  if (activeplayer == 2) {
+  } else if (activeplayer == 2) {
     dis7.display();
     dis8.display();
     dis9.display();
@@ -173,31 +227,59 @@ void DisplaysHide() {
   dis4.Hide();
   dis5.Hide();
   dis6.Hide();
+  dis7.Hide();
+  dis8.Hide();
+  dis9.Hide();
+  dis10.Hide();
+  dis11.Hide();
+  dis12.Hide();
 }
-int dis;
 void mousePressed() {
   if (gamestate == "rolled") {
-    if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
-      dice1.lock();
-      dis1.lock();
-    } else if (width/2-200 <= mouseX && mouseX <= width/2-100 && 0 <= mouseY && mouseY <= 100) {
-      dice2.lock();
-      dis2.lock();
-    } else if (width/2-100 <= mouseX && mouseX <= width/2 && 0 <= mouseY && mouseY <= 100) {
-      dice3.lock();
-      dis3.lock();
-    } else if (width/2 <= mouseX && mouseX <= width/2 +100 && 0 <= mouseY && mouseY <= 100) {
-      dice4.lock();
-      dis4.lock();
-    } else if (width/2 + 100 <= mouseX && mouseX <= width/2 + 200 && 0 <= mouseY && mouseY <= 100) {
-      dice5.lock();
-      dis5.lock();
-    } else if (width/2 + 200 <= mouseX && mouseX <= width/2 + 300 && 0 <= mouseY && mouseY <= 100) {
-      dice6.lock();
-      dis6.lock();
+    if (activeplayer == 1) {
+      if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
+        dice1.lock();
+        dis1.lock();
+      } else if (width/2-200 <= mouseX && mouseX <= width/2-100 && 0 <= mouseY && mouseY <= 100) {
+        dice2.lock();
+        dis2.lock();
+      } else if (width/2-100 <= mouseX && mouseX <= width/2 && 0 <= mouseY && mouseY <= 100) {
+        dice3.lock();
+        dis3.lock();
+      } else if (width/2 <= mouseX && mouseX <= width/2 +100 && 0 <= mouseY && mouseY <= 100) {
+        dice4.lock();
+        dis4.lock();
+      } else if (width/2 + 100 <= mouseX && mouseX <= width/2 + 200 && 0 <= mouseY && mouseY <= 100) {
+        dice5.lock();
+        dis5.lock();
+      } else if (width/2 + 200 <= mouseX && mouseX <= width/2 + 300 && 0 <= mouseY && mouseY <= 100) {
+        dice6.lock();
+        dis6.lock();
+      }
+    } else if (activeplayer == 2) {
+      if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
+        dice7.lock();
+        dis7.lock();
+      } else if (width/2-200 <= mouseX && mouseX <= width/2-100 && 0 <= mouseY && mouseY <= 100) {
+        dice8.lock();
+        dis8.lock();
+      } else if (width/2-100 <= mouseX && mouseX <= width/2 && 0 <= mouseY && mouseY <= 100) {
+        dice9.lock();
+        dis9.lock();
+      } else if (width/2 <= mouseX && mouseX <= width/2 +100 && 0 <= mouseY && mouseY <= 100) {
+        dice10.lock();
+        dis10.lock();
+      } else if (width/2 + 100 <= mouseX && mouseX <= width/2 + 200 && 0 <= mouseY && mouseY <= 100) {
+        dice11.lock();
+        dis11.lock();
+      } else if (width/2 + 200 <= mouseX && mouseX <= width/2 + 300 && 0 <= mouseY && mouseY <= 100) {
+        dice12.lock();
+        dis12.lock();
+      }
     }
   }
 }
+
 
 
 void keyPressed() {
@@ -208,17 +290,40 @@ void keyPressed() {
       break;
     case "reroll":
       Roll();
+      p2dicerender();
+      if (activeplayer == 1) {
+        activeplayer = 2;
+      }
+      if (activeplayer == 2) {
+        activeplayer = 1;
+      }
       gamestate = "rolling";
       break;
     case "start":
-      dice1.Render = true;
-      dice2.Render = true;
-      dice3.Render = true;
-      dice4.Render = true;
-      dice5.Render = true;
-      dice6.Render = true;
+      p1dicerender();
+      activeplayer = 1;
       Roll();
       gamestate = "rolling";
     }
+  }
+}
+boolean p2dicerendering = false;
+void p1dicerender() {
+  dice1.Render = true;
+  dice2.Render = true;
+  dice3.Render = true;
+  dice4.Render = true;
+  dice5.Render = true;
+  dice6.Render = true;
+}
+void p2dicerender() {
+  if (p2dicerendering == false) {
+    dice7.Render = true;
+    dice8.Render = true;
+    dice9.Render = true;
+    dice10.Render = true;
+    dice11.Render = true;
+    dice12.Render = true;
+    p2dicerendering = true;
   }
 }

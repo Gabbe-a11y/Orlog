@@ -30,7 +30,6 @@ class Dice {
   PImage arrowfavour = loadImage("Orlog.arrow.favour.png");
   PImage helmetfavour = loadImage("Orlog.housecarl.favour.png");
 
-
   Dice(float _xPos, float _yPos, float _zPos, int _type) {
     startxPos = _xPos;
     startyPos = _yPos;
@@ -45,12 +44,10 @@ class Dice {
 
   void update() {
     pushMatrix();
-
     Prep();
     RAnimation();
     Rotate();
     Render();
-
     popMatrix();
   }
   void Prep() {
@@ -63,7 +60,6 @@ class Dice {
     if (Roll) {
       rotateX(rotx);
       rotateY(roty);
-
       roty = roty + random(0.01, 0.06);
       rotx = rotx + random(0.04, 0.15);
     }
@@ -104,11 +100,12 @@ class Dice {
       Arrayassign();
     }
   }
-
   void lock() {
     locked = !locked;
   }
+
   void lockdown() {
+
     if (!locked) {
       locked = true;
       Render = false;
@@ -173,6 +170,7 @@ class Dice {
       }
     }
   }
+
   void Arrayassign() {
     switch(type) {
     case 1:
@@ -193,12 +191,30 @@ class Dice {
     case 6:
       Dices[5] = dZfront;
       break;
+    case 7:
+      Dices[0] = dZfront;
+      break;
+    case 8:
+      Dices[1] = dZfront;
+      break;
+    case 9:
+      Dices[2] = dZfront;
+      break;
+    case 10:
+      Dices[3] = dZfront;
+      break;
+    case 11:
+      Dices[4] = dZfront;
+      break;
+    case 12:
+      Dices[5] = dZfront;
+      break;
     }
   }
 
   void Random() {
-    switch(type) {  //Kollar vilken tärning det är
-    case 1:
+
+    if (type == 1 || type == 7) {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
@@ -225,8 +241,7 @@ class Dice {
         random = 1;
         break;
       }
-      break;
-    case 2:
+    } else if (type == 2 || type == 8) {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
@@ -253,8 +268,7 @@ class Dice {
         random = 1;
         break;
       }
-      break;
-    case 3:
+    } else if (type == 3 || type == 9) {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
@@ -281,8 +295,8 @@ class Dice {
         random = 1;
         break;
       }
-      break;
-    case 4:
+    }
+    if (type == 4 || type == 10) {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
@@ -309,8 +323,7 @@ class Dice {
         random = 1;
         break;
       }
-      break;
-    case 5:
+    } else if (type == 5 || type == 11) {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
@@ -337,8 +350,8 @@ class Dice {
         random = 1;
         break;
       }
-      break;
-    case 6:
+    }
+    if (type == 6 || type == 12) {
       switch(dZfront) { //Switch inom switchen, slumpmässigheten
       case 1:
         texture(axe);
@@ -365,12 +378,11 @@ class Dice {
         random = 1;
         break;
       }
-      break;
     }
   }
+
   void Randomcontinue() {
-    switch(type) {
-    case 1:
+    if (type == 1 || type == 7) {
       switch(random) {
       case 1:
         texture(axe);
@@ -391,9 +403,7 @@ class Dice {
         texture(handfavour);
         break;
       }
-      Dicecheck();
-      break;
-    case 2:
+    } else if (type == 2 || type == 8) {
       switch(random) {
       case 1:
         texture(axe);
@@ -414,9 +424,7 @@ class Dice {
         texture(helmet);
         break;
       }
-      Dicecheck();
-      break;
-    case 3:
+    } else if (type == 3 || type == 9) {
       switch(random) {
       case 1:
         texture(axe);
@@ -437,9 +445,7 @@ class Dice {
         texture(shield);
         break;
       }
-      Dicecheck();
-      break;
-    case 4:
+    } else if (type == 4 || type == 10) {
       switch(random) {
       case 1:
         texture(axe);
@@ -460,9 +466,7 @@ class Dice {
         texture(axe);
         break;
       }
-      Dicecheck();
-      break;
-    case 5:
+    } else if (type == 5 || type == 11) {
       switch(random) {
       case 1:
         texture(axe);
@@ -483,9 +487,7 @@ class Dice {
         texture(arrowfavour);
         break;
       }
-      Dicecheck();
-      break;
-    case 6:
+    } else if (type == 6 || type == 12) {
       switch(random) {
       case 1:
         texture(axe);
@@ -506,14 +508,20 @@ class Dice {
         texture(helmetfavour);
         break;
       }
-      Dicecheck();
-      break;
     }
+    Dicecheck();
   }
+
+
   void Dicecheck() {
     random = random + 1;
     if (random > 6) {
       random = 1;
+    }
+  }
+  void diceslocked(){
+    if(locked){
+      diceslocked = diceslocked + 1;
     }
   }
 }
