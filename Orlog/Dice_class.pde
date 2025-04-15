@@ -111,6 +111,13 @@ class Dice {
       Render = false;
     }
   }
+  void Rendering(){
+    if(!locked){
+      Render = true;
+    } else{
+      Render = false;
+    }
+  }
   void Render() {
     if (Render) {
       beginShape();
@@ -519,8 +526,8 @@ class Dice {
       random = 1;
     }
   }
-  void diceslocked(){
-    if(locked){
+  void diceslocked() {
+    if (locked) {
       diceslocked = diceslocked + 1;
     }
   }

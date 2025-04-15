@@ -27,7 +27,6 @@ String[] Diceres = new String[6];
 int[] Dices2 = new int[6];
 String[] Diceres2 = new String[6];
 String gamestate;
-int activeplayer;
 int p1Rolltimes;
 int p2Rolltimes;
 int disAnframes;
@@ -170,14 +169,14 @@ void Reroll() {
 
 void Diceassign() {
   gamestate = "rolling";
-  if (activeplayer == 1) {
+  if (p1dicerendering) {
     dice1.Assign();
     dice2.Assign();
     dice3.Assign();
     dice4.Assign();
     dice5.Assign();
     dice6.Assign();
-  } else if (activeplayer == 2) {
+  } else if (p2dicerendering) {
     dice7.Assign();
     dice8.Assign();
     dice9.Assign();
@@ -190,21 +189,21 @@ void Diceassign() {
 
 void Roll() {
   Diceassign();
-  if (activeplayer == 1) {
+  if (p1dicerendering) {
     p1Rolltimes = p1Rolltimes + 1;
-  } else if (activeplayer == 2) {
+  } else if (p2dicerendering) {
     p2Rolltimes = p2Rolltimes + 1;
   }
 }
 void Display() {
-  if (activeplayer == 1) {
+  if (p1dicerendering) {
     dis1.display();
     dis2.display();
     dis3.display();
     dis4.display();
     dis5.display();
     dis6.display();
-  } else if (activeplayer == 2) {
+  } else if (p2dicerendering) {
     dis7.display();
     dis8.display();
     dis9.display();
@@ -236,7 +235,7 @@ void DisplaysHide() {
 }
 void mousePressed() {
   if (gamestate == "rolled") {
-    if (activeplayer == 1) {
+    if (p1dicerendering) {
       if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
         dice1.lock();
         dis1.lock();
@@ -256,7 +255,7 @@ void mousePressed() {
         dice6.lock();
         dis6.lock();
       }
-    } else if (activeplayer == 2) {
+    } else if (p2dicerendering) {
       if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
         dice7.lock();
         dis7.lock();
@@ -290,40 +289,52 @@ void keyPressed() {
       break;
     case "reroll":
       Roll();
+      p1dicerendering = !p1dicerendering;
+      p2dicerendering = !p2dicerendering;
+      p1dicerender();
       p2dicerender();
-      if (activeplayer == 1) {
-        activeplayer = 2;
-      }
-      if (activeplayer == 2) {
-        activeplayer = 1;
-      }
       gamestate = "rolling";
       break;
     case "start":
       p1dicerender();
-      activeplayer = 1;
       Roll();
       gamestate = "rolling";
     }
   }
 }
+boolean p1dicerendering = true;
 boolean p2dicerendering = false;
 void p1dicerender() {
-  dice1.Render = true;
-  dice2.Render = true;
-  dice3.Render = true;
-  dice4.Render = true;
-  dice5.Render = true;
-  dice6.Render = true;
+  if (p1dicerendering == true) {
+    dice1.Rendering(); 
+    dice2.Rendering();
+    dice3.Rendering();
+    dice4.Rendering();
+    dice5.Rendering();
+    dice6.Rendering();
+  } else {
+    dice1.Render = false;
+    dice2.Render = false;
+    dice3.Render = false;
+    dice4.Render = false;
+    dice5.Render = false;
+    dice6.Render = false;
+  }
 }
 void p2dicerender() {
-  if (p2dicerendering == false) {
-    dice7.Render = true;
-    dice8.Render = true;
-    dice9.Render = true;
-    dice10.Render = true;
-    dice11.Render = true;
-    dice12.Render = true;
-    p2dicerendering = true;
+  if (p2dicerendering == true) {
+    dice7.Rendering();
+    dice8.Rendering();
+    dice9.Rendering();
+    dice10.Rendering();
+    dice11.Rendering();
+    dice12.Rendering();
+  } else {
+    dice7.Render = false;
+    dice8.Render = false;
+    dice9.Render = false;
+    dice10.Render = false;
+    dice11.Render = false;
+    dice12.Render = false;
   }
 }

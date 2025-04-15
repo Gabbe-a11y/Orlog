@@ -144,118 +144,118 @@ void read() {
     }
   }
   switch(Diceres2[0]) {
-    case "Axe":
-      p2axes = p2axes + 1;
-      break;
-    case "Arrow+":
-      p2favour = p2favour + 1;
-      p2arrows = p2arrows + 1;
-      break;
-    case "Shield":
-      p2shields = p2shields + 1;
-      break;
-    case "Helmet":
-      p2helmets = p2helmets + 1;
-      break;
-    case "Hand+":
-      p2favour = p2favour + 1;
-      p2hands = p2hands + 1;
-      break;
-    }
-    switch(Diceres2[1]) {
-    case "Axe":
-      p2axes = p2axes + 1;
-      break;
-    case "Arrow":
-      p2arrows = p2arrows + 1;
-      break;
-    case "Shield+":
-      p2favour = p2favour + 1;
-      p2shields = p2shields + 1;
-      break;
-    case "Hand+":
-      p2favour = p2favour + 1;
-      p2hands = p2hands + 1;
-      break;
-    case "Helmet":
-      p2helmets = p2helmets + 1;
-      break;
-    }
-    switch(Diceres2[2]) {
-    case "Axe":
-      p2axes = p2axes + 1;
-      break;
-    case "Hand":
-      p2hands = p2hands + 1;
-      break;
-    case "Arrow+":
-      p2favour = p2favour + 1;
-      p2arrows = p2arrows + 1;
-      break;
-    case "Helmet+":
-      p2favour = p2favour + 1;
-      p2helmets = p2helmets + 1;
-      break;
-    case "Shield":
-      p2shields = p2shields + 1;
-      break;
-    }
-    switch(Diceres2[3]) {
-    case "Axe":
-      p2axes = p2axes + 1;
-      break;
-    case "Arrow":
-      p2arrows = p2arrows + 1;
-      break;
-    case "Hand+":
-      p2favour = p2favour + 1;
-      p2hands = p2hands + 1;
-      break;
-    case "Shield":
-      p2shields = p2shields + 1;
-      break;
-    case "Helmet+":
-      p2favour = p2favour + 1;
-      p2helmets = p2helmets + 1;
-      break;
-    }
-    switch(Diceres2[4]) {
-    case "Axe":
-      p2axes = p2axes + 1;
-      break;
-    case "Hand":
-      p2hands = p2hands + 1;
-      break;
-    case "Shield+":
-      p2favour = p2favour + 1;
-      p2shields = p2shields + 1;
-      break;
-    case "Helmet":
-      p2helmets = p2helmets + 1;
-      break;
-    case "Arrow+":
-      p2favour = p2favour + 1;
-      p2arrows = p2arrows + 1;
-      break;
-    }
-    switch(Diceres2[5]) {
-    case "Axe":
-      p2axes = p2axes + 1;
-      break;
-    case "Hand":
-      p2hands = p2hands + 1;
-      break;
-    case "Shield+":
-      p2favour = p2favour + 1;
-      p2shields = p2shields + 1;
-      break;
-    case "Arrow":
-      p2arrows = p2arrows + 1;
-      break;
-    case "Helmet+":
-      p2favour = p2favour + 1;
-      p2helmets = p2helmets + 1;
-      ;
-      break;
-    }
+  case "Axe":
+    p2axes = p2axes + 1;
+    break;
+  case "Arrow+":
+    p2favour = p2favour + 1;
+    p2arrows = p2arrows + 1;
+    break;
+  case "Shield":
+    p2shields = p2shields + 1;
+    break;
+  case "Helmet":
+    p2helmets = p2helmets + 1;
+    break;
+  case "Hand+":
+    p2favour = p2favour + 1;
+    p2hands = p2hands + 1;
+    break;
   }
+  switch(Diceres2[1]) {
+  case "Axe":
+    p2axes = p2axes + 1;
+    break;
+  case "Arrow":
+    p2arrows = p2arrows + 1;
+    break;
+  case "Shield+":
+    p2favour = p2favour + 1;
+    p2shields = p2shields + 1;
+    break;
+  case "Hand+":
+    p2favour = p2favour + 1;
+    p2hands = p2hands + 1;
+    break;
+  case "Helmet":
+    p2helmets = p2helmets + 1;
+    break;
+  }
+  switch(Diceres2[2]) {
+  case "Axe":
+    p2axes = p2axes + 1;
+    break;
+  case "Hand":
+    p2hands = p2hands + 1;
+    break;
+  case "Arrow+":
+    p2favour = p2favour + 1;
+    p2arrows = p2arrows + 1;
+    break;
+  case "Helmet+":
+    p2favour = p2favour + 1;
+    p2helmets = p2helmets + 1;
+    break;
+  case "Shield":
+    p2shields = p2shields + 1;
+    break;
+  }
+  switch(Diceres2[3]) {
+  case "Axe":
+    p2axes = p2axes + 1;
+    break;
+  case "Arrow":
+    p2arrows = p2arrows + 1;
+    break;
+  case "Hand+":
+    p2favour = p2favour + 1;
+    p2hands = p2hands + 1;
+    break;
+  case "Shield":
+    p2shields = p2shields + 1;
+    break;
+  case "Helmet+":
+    p2favour = p2favour + 1;
+    p2helmets = p2helmets + 1;
+    break;
+  }
+  switch(Diceres2[4]) {
+  case "Axe":
+    p2axes = p2axes + 1;
+    break;
+  case "Hand":
+    p2hands = p2hands + 1;
+    break;
+  case "Shield+":
+    p2favour = p2favour + 1;
+    p2shields = p2shields + 1;
+    break;
+  case "Helmet":
+    p2helmets = p2helmets + 1;
+    break;
+  case "Arrow+":
+    p2favour = p2favour + 1;
+    p2arrows = p2arrows + 1;
+    break;
+  }
+  switch(Diceres2[5]) {
+  case "Axe":
+    p2axes = p2axes + 1;
+    break;
+  case "Hand":
+    p2hands = p2hands + 1;
+    break;
+  case "Shield+":
+    p2favour = p2favour + 1;
+    p2shields = p2shields + 1;
+    break;
+  case "Arrow":
+    p2arrows = p2arrows + 1;
+    break;
+  case "Helmet+":
+    p2favour = p2favour + 1;
+    p2helmets = p2helmets + 1;
+    ;
+    break;
+  }
+}

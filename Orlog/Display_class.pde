@@ -85,9 +85,33 @@ class Display {
       case 6:
         xPos = xPos - 6.51;
         yPos = yPos + 3;
-        break;     
+        break;
+      case 12:
+        xPos = xPos + 1.51;
+        yPos = yPos + 0.5;
+        break;
+      case 11:
+        xPos = xPos + 2.51;
+        yPos = yPos + 1;
+        break;
+      case 10:
+        xPos = xPos + 3.51;
+        yPos = yPos + 1.5;
+        break;
+      case 9:
+        xPos = xPos + 4.51;
+        yPos = yPos + 2;
+        break;
+      case 8:
+        xPos = xPos + 5.51;
+        yPos = yPos + 2.5;
+        break;
+      case 7:
+        xPos = xPos + 6.51;
+        yPos = yPos + 3;
+        break;
       }
-      
+
       if (frameCount == disAnframes + 100) {
         animated = true;
       }
@@ -98,8 +122,8 @@ class Display {
       Rendering = false;
     }
   }
-  void display(){
-    if (!locked){
+  void display() {
+    if (!locked) {
       Rendering = true;
     }
   }
@@ -202,6 +226,120 @@ class Display {
       break;
     case 6:
       switch(Diceres[5]) {
+      case "Axe":
+        texture(axe);
+        break;
+      case "Arrow":
+        texture(arrow);
+        break;
+      case "Shield+":
+        texture(shieldfavour);
+        break;
+      case "Helmet+":
+        texture(helmetfavour);
+        break;
+      case "Hand":
+        texture(hand);
+        break;
+      }
+      break;
+    case 7:
+      switch(Diceres2[0]) {
+      case "Axe":
+        texture(axe);
+        break;
+      case "Arrow+":
+        texture(arrowfavour);
+        break;
+      case "Shield":
+        texture(shield);
+        break;
+      case "Helmet":
+        texture(helmet);
+        break;
+      case "Hand+":
+        texture(handfavour);
+        break;
+      }
+      break;
+    case 8:
+      switch(Diceres2[1]) {
+      case "Axe":
+        texture(axe);
+        break;
+      case "Arrow":
+        texture(arrow);
+        break;
+      case "Shield+":
+        texture(shieldfavour);
+        break;
+      case "Helmet":
+        texture(helmet);
+        break;
+      case "Hand+":
+        texture(handfavour);
+        break;
+      }
+      break;
+    case 9:
+      switch(Diceres2[2]) {
+      case "Axe":
+        texture(axe);
+        break;
+      case "Arrow+":
+        texture(arrowfavour);
+        break;
+      case "Shield":
+        texture(shield);
+        break;
+      case "Helmet+":
+        texture(helmetfavour);
+        break;
+      case "Hand":
+        texture(hand);
+        break;
+      }
+      break;
+    case 10:
+      switch(Diceres2[3]) {
+      case "Axe":
+        texture(axe);
+        break;
+      case "Arrow":
+        texture(arrow);
+        break;
+      case "Shield":
+        texture(shield);
+        break;
+      case "Helmet+":
+        texture(helmetfavour);
+        break;
+      case "Hand+":
+        texture(handfavour);
+        break;
+      }
+      break;
+    case 11:
+      switch(Diceres2[4]) {
+      case "Axe":
+        texture(axe);
+        break;
+      case "Arrow+":
+        texture(arrowfavour);
+        break;
+      case "Shield+":
+        texture(shieldfavour);
+        break;
+      case "Helmet":
+        texture(helmet);
+        break;
+      case "Hand":
+        texture(hand);
+        break;
+      }
+      break;
+    case 12:
+      switch(Diceres2[5]) {
       case "Axe":
         texture(axe);
         break;
