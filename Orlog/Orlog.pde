@@ -22,6 +22,8 @@ Display dis9;
 Display dis10;
 Display dis11;
 Display dis12;
+Player p1;
+Player p2;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
 int[] Dices2 = new int[6];
@@ -58,16 +60,14 @@ void setup() {
   dis10 = new Display(width/2 + 50, 50, -100, 10);
   dis11 = new Display(width/2 + 150, 50, -100, 11);
   dis12 = new Display(width/2 + 250, 50, -100, 12);
+  p1 = new Player(1);
+  p2 = new Player(2);
   gamestate = "start";
-  p1health = 15;
-  p2health = 15;
-  p1favour = 0;
-  p2favour = 0;
 }
 
 void draw() {
   background(50);
-  Reroll();
+  //Reroll();
   Text();
   dis1.update();
   dis2.update();
@@ -97,7 +97,7 @@ void draw() {
     gamestate = "reroll?";
   }
   if (gamestate == "rolled") {
-    if (p1Rolltimes == 3) {
+    if (p1.rolltimes == 3) {
       DisAnStart();
       dis1.lockdown();
       dis2.lockdown();
@@ -112,7 +112,7 @@ void draw() {
       dice5.lockdown();
       dice6.lockdown();
     }
-    if (p2Rolltimes == 3) {
+    if (p2.rolltimes == 3) {
       DisAnStart();
       dis7.lockdown();
       dis8.lockdown();
@@ -132,13 +132,16 @@ void draw() {
 
 void Text() {
   fill(250);
-  text(p1health, 50, 450);
-  text(p2health, 700, 450);
+  text(p1.health, 50, 450);
+  text(p2.health, 700, 450);
   switch(gamestate) {
-  case "reroll":
-    break;
   case "rolled":
     text("Tryck på de du vill behålla", width/2 - 100, height/2, 50);
+    if (p1.dicerendering) {
+      text("Spelare 1", width/2 - 25, height/2 + 200, 50);
+    } else if (p2.dicerendering) {
+      text("Spelare 2", width/2 - 25, height/2 + 200, 50);
+    }
     break;
   }
 }
@@ -158,8 +161,10 @@ void Reroll() {
   dice11.diceslocked();
   dice12.diceslocked();
   if (gamestate == "reroll?") {
-    if (p1Rolltimes == 3 && p2Rolltimes == 3 || diceslocked == 12) {
+    if (p1.rolltimes == 3 && p2.rolltimes == 3 || diceslocked == 12) {
       gamestate = "read";
+      p1.read();
+      p2.read();
     } else {
       DisplaysHide();
       gamestate = "reroll";
@@ -169,41 +174,33 @@ void Reroll() {
 
 void Diceassign() {
   gamestate = "rolling";
-  if (p1dicerendering) {
-    dice1.Assign();
-    dice2.Assign();
-    dice3.Assign();
-    dice4.Assign();
-    dice5.Assign();
-    dice6.Assign();
-  } else if (p2dicerendering) {
-    dice7.Assign();
-    dice8.Assign();
-    dice9.Assign();
-    dice10.Assign();
-    dice11.Assign();
-    dice12.Assign();
-  }
+  dice1.Assign();
+  dice2.Assign();
+  dice3.Assign();
+  dice4.Assign();
+  dice5.Assign();
+  dice6.Assign();
+  dice7.Assign();
+  dice8.Assign();
+  dice9.Assign();
+  dice10.Assign();
+  dice11.Assign();
+  dice12.Assign();
   Diceresults();
 }
 
 void Roll() {
   Diceassign();
-  if (p1dicerendering) {
-    p1Rolltimes = p1Rolltimes + 1;
-  } else if (p2dicerendering) {
-    p2Rolltimes = p2Rolltimes + 1;
-  }
 }
 void Display() {
-  if (p1dicerendering) {
+  if (p1.dicerendering) {
     dis1.display();
     dis2.display();
     dis3.display();
     dis4.display();
     dis5.display();
     dis6.display();
-  } else if (p2dicerendering) {
+  } else if (p2.dicerendering) {
     dis7.display();
     dis8.display();
     dis9.display();
@@ -235,7 +232,7 @@ void DisplaysHide() {
 }
 void mousePressed() {
   if (gamestate == "rolled") {
-    if (p1dicerendering) {
+    if (p1.dicerendering) {
       if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
         dice1.lock();
         dis1.lock();
@@ -255,7 +252,7 @@ void mousePressed() {
         dice6.lock();
         dis6.lock();
       }
-    } else if (p2dicerendering) {
+    } else if (p2.dicerendering) {
       if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
         dice7.lock();
         dis7.lock();
@@ -284,29 +281,26 @@ void mousePressed() {
 void keyPressed() {
   if (key == ENTER) {
     switch (gamestate) {
-    case "rolled":
-      DisAnStart();
+      case "rolled":
+        DisAnStart();
       break;
-    case "reroll":
-      Roll();
-      p1dicerendering = !p1dicerendering;
-      p2dicerendering = !p2dicerendering;
-      p1dicerender();
-      p2dicerender();
+      case "reroll":
+        Roll();
+      p1.dicerendering();
+      p2.dicerendering();
+      dicerender();
       gamestate = "rolling";
       break;
-    case "start":
-      p1dicerender();
+      case "start":
+      dicerender();
       Roll();
       gamestate = "rolling";
     }
   }
 }
-boolean p1dicerendering = true;
-boolean p2dicerendering = false;
-void p1dicerender() {
-  if (p1dicerendering == true) {
-    dice1.Rendering(); 
+void dicerender() {
+  if (p1.dicerendering == true) {
+    dice1.Rendering();
     dice2.Rendering();
     dice3.Rendering();
     dice4.Rendering();
@@ -320,9 +314,7 @@ void p1dicerender() {
     dice5.Render = false;
     dice6.Render = false;
   }
-}
-void p2dicerender() {
-  if (p2dicerendering == true) {
+    if (p2.dicerendering == true) {
     dice7.Rendering();
     dice8.Rendering();
     dice9.Rendering();

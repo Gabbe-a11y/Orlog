@@ -5,7 +5,7 @@ void Health_stones() {
   float yPos2 = 450;
   float zPos = 50;
   int size = 25;
-  for (int i = 0; i < p1health; i = i + 1) {
+  for (int i = 0; i < p1.health; i = i + 1) {
     pushMatrix();
     translate(xPos1, yPos1, zPos);
     beginShape();
@@ -23,7 +23,7 @@ void Health_stones() {
       xPos1 = xPos1 + 25;
     }
   }
-  for (int i = 0; i < p2health; i = i + 1) {
+  for (int i = 0; i < p2.health; i = i + 1) {
     pushMatrix();
     translate(xPos2, yPos2, zPos);
     beginShape();

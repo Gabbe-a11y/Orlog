@@ -199,22 +199,22 @@ class Dice {
       Dices[5] = dZfront;
       break;
     case 7:
-      Dices[0] = dZfront;
+      Dices2[0] = dZfront;
       break;
     case 8:
-      Dices[1] = dZfront;
+      Dices2[1] = dZfront;
       break;
     case 9:
-      Dices[2] = dZfront;
+      Dices2[2] = dZfront;
       break;
     case 10:
-      Dices[3] = dZfront;
+      Dices2[3] = dZfront;
       break;
     case 11:
-      Dices[4] = dZfront;
+      Dices2[4] = dZfront;
       break;
     case 12:
-      Dices[5] = dZfront;
+      Dices2[5] = dZfront;
       break;
     }
   }
