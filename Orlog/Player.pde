@@ -8,7 +8,8 @@ class Player {
   int hands;
   int type;
   int rolltimes;
-  boolean dicerendering;
+  boolean activeplayer;
+  boolean priority;
   boolean alive;
   boolean locked;
   Player(int _type) {
@@ -18,16 +19,32 @@ class Player {
     rolltimes = 0;
     health = 15;
     if (type == 1) {
-      dicerendering = true;
+      activeplayer = true;
+      priority = false;
     } else if (type == 2) {
-      dicerendering = false;
+      activeplayer = false;
+      priority = true;
     }
   }
 
   void dicerendering() {
-    dicerendering = !dicerendering;
+    activeplayer = !activeplayer;
   }
   
+  void priorityswap(){
+    priority = !priority;
+  }
+  
+  void damage(){
+    if (damage <= 0){
+      damage = 0;
+    }
+    health = health - damage;
+    if (health <= 0){
+      gamestate = "end";
+    }
+  }
+
   void readprep() {
     axes = 0;
     arrows = 0;

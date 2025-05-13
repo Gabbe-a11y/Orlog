@@ -111,10 +111,10 @@ class Dice {
       Render = false;
     }
   }
-  void Rendering(){
-    if(!locked){
+  void Rendering() {
+    if (!locked) {
       Render = true;
-    } else{
+    } else {
       Render = false;
     }
   }

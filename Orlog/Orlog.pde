@@ -29,13 +29,23 @@ String[] Diceres = new String[6];
 int[] Dices2 = new int[6];
 String[] Diceres2 = new String[6];
 String gamestate;
-int p1Rolltimes;
-int p2Rolltimes;
 int disAnframes;
+int combatAnframes;
+int rounds;
 PImage stone;
+PImage heal;
+PImage skill;
+PImage wrath;
+PImage favour;
+PImage tutorial;
 void setup() {
-  size(750, 500, P3D);
+  size(1107, 720, P3D);
   stone = loadImage("Health-stone.png");
+  heal = loadImage("Godly healing.png");
+  skill = loadImage("Godly skill.png");
+  wrath = loadImage("Godly wrath.png");
+  favour = loadImage("Orlog.favour.png");
+  tutorial = loadImage("Orlog.rules.png");
   dice1 = new Dice (width/2 - 250, height/2, -100, 1);
   dice2 = new Dice (width/2 - 150, height/2, -100, 2);
   dice3 = new Dice (width/2 - 50, height/2, -100, 3);
@@ -63,12 +73,12 @@ void setup() {
   p1 = new Player(1);
   p2 = new Player(2);
   gamestate = "start";
+  rounds = 0;
 }
 
 void draw() {
   background(50);
-  //Reroll();
-  Text();
+  Reroll();
   dis1.update();
   dis2.update();
   dis3.update();
@@ -93,8 +103,19 @@ void draw() {
   dice10.update();
   dice11.update();
   dice12.update();
+  if (gamestate == "start") {
+    Tutorial();
+  }
+  if (gamestate == "god powers choice"){
+    GodlyPowers();
+  }
+  Text();
   if (gamestate == "disan" && disAnframes + 100 == frameCount) {
     gamestate = "reroll?";
+  }
+  if (gamestate == "combatan" && combatAnframes + 100 == frameCount) {
+    for (int i = 1; i < 13; i = i + 1) {
+    }
   }
   if (gamestate == "rolled") {
     if (p1.rolltimes == 3) {
@@ -130,19 +151,26 @@ void draw() {
   }
 }
 
+void Tutorial() {
+  background(tutorial);
+}
 void Text() {
   fill(250);
-  text(p1.health, 50, 450);
-  text(p2.health, 700, 450);
-  switch(gamestate) {
-  case "rolled":
+  if (gamestate == "start"){
+    text("Tryck på enter för att starta", width/2-50, height/2+300);
+  } else{
+  text(p1.health, 50, height/2+20);
+  text(p2.health, width-50, height/2+19);
+  }
+  if (gamestate == "rolled"){
     text("Tryck på de du vill behålla", width/2 - 100, height/2, 50);
-    if (p1.dicerendering) {
+  }
+  if (gamestate == "rolled" || gamestate == "god power choice"){
+    if (p1.activeplayer) {
       text("Spelare 1", width/2 - 25, height/2 + 200, 50);
-    } else if (p2.dicerendering) {
+    } else if (p2.activeplayer) {
       text("Spelare 2", width/2 - 25, height/2 + 200, 50);
     }
-    break;
   }
 }
 int diceslocked;
@@ -161,10 +189,15 @@ void Reroll() {
   dice11.diceslocked();
   dice12.diceslocked();
   if (gamestate == "reroll?") {
-    if (p1.rolltimes == 3 && p2.rolltimes == 3 || diceslocked == 12) {
+    if (p1.rolltimes >= 3 && p2.rolltimes >= 3 || diceslocked == 12) {
       gamestate = "read";
       p1.read();
       p2.read();
+      p1.priorityswap();
+      p2.priorityswap();
+      gamestate = "godly powers";
+      println(p1.favour);
+      println(p2.favour);
     } else {
       DisplaysHide();
       gamestate = "reroll";
@@ -190,17 +223,22 @@ void Diceassign() {
 }
 
 void Roll() {
+  if (p1.activeplayer) {
+    p1.rolltimes = p1.rolltimes + 1;
+  } else if (p2.activeplayer) {
+    p2.rolltimes = p2.rolltimes + 1;
+  }
   Diceassign();
 }
 void Display() {
-  if (p1.dicerendering) {
+  if (p1.activeplayer) {
     dis1.display();
     dis2.display();
     dis3.display();
     dis4.display();
     dis5.display();
     dis6.display();
-  } else if (p2.dicerendering) {
+  } else if (p2.activeplayer) {
     dis7.display();
     dis8.display();
     dis9.display();
@@ -232,7 +270,7 @@ void DisplaysHide() {
 }
 void mousePressed() {
   if (gamestate == "rolled") {
-    if (p1.dicerendering) {
+    if (p1.activeplayer) {
       if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
         dice1.lock();
         dis1.lock();
@@ -252,7 +290,7 @@ void mousePressed() {
         dice6.lock();
         dis6.lock();
       }
-    } else if (p2.dicerendering) {
+    } else if (p2.activeplayer) {
       if (width/2-300 <= mouseX && mouseX <= width/2-200 && 0 <= mouseY && mouseY <= 100) {
         dice7.lock();
         dis7.lock();
@@ -274,32 +312,35 @@ void mousePressed() {
       }
     }
   }
+  if (gamestate == "god power choice"){
 }
-
-
-
+}
 void keyPressed() {
   if (key == ENTER) {
     switch (gamestate) {
-      case "rolled":
-        DisAnStart();
+    case "rolled":
+      DisAnStart();
       break;
-      case "reroll":
-        Roll();
+    case "reroll":
       p1.dicerendering();
       p2.dicerendering();
+      Roll();
       dicerender();
       gamestate = "rolling";
       break;
-      case "start":
-      dicerender();
+    case "start":
       Roll();
+      dicerender();
       gamestate = "rolling";
+      break;
+      case "god power choice":
+      
+      break;
     }
   }
 }
 void dicerender() {
-  if (p1.dicerendering == true) {
+  if (p1.activeplayer == true) {
     dice1.Rendering();
     dice2.Rendering();
     dice3.Rendering();
@@ -314,7 +355,7 @@ void dicerender() {
     dice5.Render = false;
     dice6.Render = false;
   }
-    if (p2.dicerendering == true) {
+  if (p2.activeplayer == true) {
     dice7.Rendering();
     dice8.Rendering();
     dice9.Rendering();

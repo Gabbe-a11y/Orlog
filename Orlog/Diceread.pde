@@ -1,5 +1,0 @@
-int damage;
-
-void combat(){
-  
-}
