@@ -24,6 +24,9 @@ Display dis11;
 Display dis12;
 Player p1;
 Player p2;
+God Wrath;
+God Skill;
+God Heal;
 int[] Dices = new int[6];
 String[] Diceres = new String[6];
 int[] Dices2 = new int[6];
@@ -31,21 +34,17 @@ String[] Diceres2 = new String[6];
 String gamestate;
 int disAnframes;
 int combatAnframes;
-int rounds;
+int timeschosen;
 PImage stone;
-PImage heal;
-PImage skill;
-PImage wrath;
 PImage favour;
 PImage tutorial;
+PImage Blackscreen;
 void setup() {
   size(1107, 720, P3D);
   stone = loadImage("Health-stone.png");
-  heal = loadImage("Godly healing.png");
-  skill = loadImage("Godly skill.png");
-  wrath = loadImage("Godly wrath.png");
   favour = loadImage("Orlog.favour.png");
   tutorial = loadImage("Orlog.rules.png");
+  Blackscreen = loadImage("Orlog.blackscreen.png");
   dice1 = new Dice (width/2 - 250, height/2, -100, 1);
   dice2 = new Dice (width/2 - 150, height/2, -100, 2);
   dice3 = new Dice (width/2 - 50, height/2, -100, 3);
@@ -72,8 +71,10 @@ void setup() {
   dis12 = new Display(width/2 + 250, 50, -100, 12);
   p1 = new Player(1);
   p2 = new Player(2);
+  Wrath = new God(width/2 - 250, height/2, 1);
+  Skill = new God(width/2, height/2, 2);
+  Heal = new God(width/2 + 250, height/2, 3);
   gamestate = "start";
-  rounds = 0;
 }
 
 void draw() {
@@ -103,11 +104,14 @@ void draw() {
   dice10.update();
   dice11.update();
   dice12.update();
+  //Backtint();
+  Wrath.update();
+  Skill.update();
+  Heal.update();
   if (gamestate == "start") {
     Tutorial();
   }
-  if (gamestate == "god powers choice"){
-    GodlyPowers();
+  if (gamestate == "god powers choice") {
   }
   Text();
   if (gamestate == "disan" && disAnframes + 100 == frameCount) {
@@ -151,21 +155,35 @@ void draw() {
   }
 }
 
+void Backtint() {
+  if (gamestate == "god powers choice") {
+    beginShape();
+    tint(255, 200);
+    fill(0);
+    vertex(0, 0, 0);
+    vertex(width, 0, 0);
+    vertex(width, height, 0);
+    vertex(0, height, 0);
+    endShape();
+    tint(255);
+  }
+}
+
 void Tutorial() {
   background(tutorial);
 }
 void Text() {
   fill(250);
-  if (gamestate == "start"){
+  if (gamestate == "start") {
     text("Tryck på enter för att starta", width/2-50, height/2+300);
-  } else{
-  text(p1.health, 50, height/2+20);
-  text(p2.health, width-50, height/2+19);
+  } else {
+    text(p1.health, 50, height/2+20);
+    text(p2.health, width-50, height/2+19);
   }
-  if (gamestate == "rolled"){
+  if (gamestate == "rolled") {
     text("Tryck på de du vill behålla", width/2 - 100, height/2, 50);
   }
-  if (gamestate == "rolled" || gamestate == "god power choice"){
+  if (gamestate == "rolled" || gamestate == "god powers choice") {
     if (p1.activeplayer) {
       text("Spelare 1", width/2 - 25, height/2 + 200, 50);
     } else if (p2.activeplayer) {
@@ -193,9 +211,7 @@ void Reroll() {
       gamestate = "read";
       p1.read();
       p2.read();
-      p1.priorityswap();
-      p2.priorityswap();
-      gamestate = "godly powers";
+      gamestate = "god powers choice";
       println(p1.favour);
       println(p2.favour);
     } else {
@@ -252,6 +268,11 @@ void Display() {
 void DisAnStart() {
   disAnframes = frameCount;
   gamestate = "disan";
+}
+
+void CombatAnStart() {
+  combatAnframes = frameCount;
+  gamestate = "coman";
 }
 
 void DisplaysHide() {
@@ -312,8 +333,8 @@ void mousePressed() {
       }
     }
   }
-  if (gamestate == "god power choice"){
-}
+  if (gamestate == "god power choice") {
+  }
 }
 void keyPressed() {
   if (key == ENTER) {
@@ -333,8 +354,8 @@ void keyPressed() {
       dicerender();
       gamestate = "rolling";
       break;
-      case "god power choice":
-      
+    case "god power choice":
+
       break;
     }
   }

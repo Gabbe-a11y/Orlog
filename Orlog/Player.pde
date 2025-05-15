@@ -12,6 +12,8 @@ class Player {
   boolean priority;
   boolean alive;
   boolean locked;
+  int godfavour;
+  int favourintensity;
   Player(int _type) {
     type = _type;
     alive = true;
@@ -30,19 +32,22 @@ class Player {
   void dicerendering() {
     activeplayer = !activeplayer;
   }
-  
-  void priorityswap(){
+
+  void priorityswap() {
     priority = !priority;
   }
-  
-  void damage(){
-    if (damage <= 0){
+
+  void damage() {
+    if (damage <= 0) {
       damage = 0;
     }
     health = health - damage;
-    if (health <= 0){
+    if (health <= 0) {
       gamestate = "end";
     }
+  }
+  void steal(){
+    
   }
 
   void readprep() {
