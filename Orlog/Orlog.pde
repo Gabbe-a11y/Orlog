@@ -190,6 +190,8 @@ void Text() {
       text("Spelare 2", width/2 - 25, height/2 + 200, 50);
     }
   }
+  if (gamestate == "god powers choice") {
+  }
 }
 int diceslocked;
 void Reroll() {
@@ -212,6 +214,8 @@ void Reroll() {
       p1.read();
       p2.read();
       gamestate = "god powers choice";
+      p1.predictedfavour();
+      p2.predictedfavour();
       println(p1.favour);
       println(p2.favour);
     } else {
@@ -289,6 +293,8 @@ void DisplaysHide() {
   dis11.Hide();
   dis12.Hide();
 }
+
+int choice;
 void mousePressed() {
   if (gamestate == "rolled") {
     if (p1.activeplayer) {
@@ -334,6 +340,42 @@ void mousePressed() {
     }
   }
   if (gamestate == "god power choice") {
+    if (width/2-350 <= mouseX && mouseX <= width/2-150) { //Wrath
+      if (height/2 + 100 <= mouseY && mouseY < height/2 + 200) {
+        choice = 1;
+        Wrath.choice();
+      } else if (height/2 + 200 <= mouseY && mouseY < height/2 + 300) {
+        choice = 2;
+        Wrath.choice();
+      } else if (height/2+300 <= mouseY && mouseY < height/2 + 400) {
+        choice = 3;
+        Wrath.choice();
+      }
+    }
+    else if (width/2-100 <= mouseX && mouseX <= width/2 + 100){ //Skill
+    if (height/2 + 100 <= mouseY && mouseY < height/2 + 200) {
+      choice = 1;
+      Skill.choice();
+      } else if (height/2 + 200 <= mouseY && mouseY < height/2 + 300) {
+        choice = 2;
+        Skill.choice();
+      } else if (height/2+300 <= mouseY && mouseY < height/2 + 400) {
+        choice = 3;
+        Skill.choice();
+      }
+    }
+    else if (width/2 + 150 <= mouseX && mouseX <= width/2 + 350){ //Health
+      if (height/2 + 100 <= mouseY && mouseY < height/2 + 200) {
+        choice = 1;
+        Heal.choice();
+      } else if (height/2 + 200 <= mouseY && mouseY < height/2 + 300) {
+        choice = 2;
+        Heal.choice();
+      } else if (height/2+300 <= mouseY && mouseY < height/2 + 400) {
+        choice = 3;
+        Heal.choice();
+      }
+    }
   }
 }
 void keyPressed() {

@@ -8,6 +8,7 @@ class Player {
   int hands;
   int type;
   int rolltimes;
+  int pfavour;
   boolean activeplayer;
   boolean priority;
   boolean alive;
@@ -46,8 +47,8 @@ class Player {
       gamestate = "end";
     }
   }
-  void steal(){
-    
+  void predictedfavour(){
+    pfavour = favour + hands;
   }
 
   void readprep() {
